@@ -27,4 +27,4 @@
         <!-- INÍCIO DA SEÇÃO DEPOIMENTO -->
         @include('site.home.depoimento')
 
-@endsection
+@endsection 

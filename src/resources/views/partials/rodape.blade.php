@@ -67,12 +67,12 @@
                 </li>
                 <li>
                     <a href="#" target="_blank">
-                        <img src="{{ asset{'barista/assets/instagram-24.png') }}" alt="Logo Instagram - Casa do Barista">
+                        <img src="{{ asset('barista/assets/instagram-24.png') }}" alt="Logo Instagram - Casa do Barista">
                     </a>
                 </li>
                 <li>
                     <a href="#" target="_blank">
-                        <img src="{{ asset{'barista/assets/linkedin-24.png') }}" alt="Logo LinkedIn - Casa do Barista">
+                        <img src="{{ asset('barista/assets/linkedin-24.png') }}" alt="Logo LinkedIn - Casa do Barista">
                     </a>
                 </li>
                 <li>

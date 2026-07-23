@@ -13,6 +13,7 @@
 // Main 
 <main>
     // Area Conteudo
+    
     @yield('content')
 </main>
 
