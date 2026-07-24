@@ -56,6 +56,6 @@
 
     <!-- ESTILO DO BARISTA - APLICA ESTILO NO HTML -->
     <link rel="stylesheet" href="{{ asset('barista/css/estilo.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/responsivo.css') }}">
+    <link rel="stylesheet" href="{{ asset('barista/css/responsivo.css') }}">
 
 </head>

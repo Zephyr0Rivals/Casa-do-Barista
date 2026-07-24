@@ -10,17 +10,17 @@
         <article>
             <div class="estrela">
                 <ul>
-                    <li><img src=" {{ asset('assets/star.svg') }}" alt="Estrela Depo"></li>
-                    <li><img src=" {{ asset('assets/star.svg') }}" alt="Estrela Depo"></li>
-                    <li><img src=" {{ asset('assets/star.svg') }}" alt="Estrela Depo"></li>
-                    <li><img src=" {{ asset('assets/star.svg') }}" alt="Estrela Depo"></li>
-                    <li><img src=" {{ asset('assets/star.svg') }}" alt="Estrela Depo"></li>
+                    <li><img src=" {{ asset('barista/assets/star.svg') }}" alt="Estrela Depo"></li>
+                    <li><img src=" {{ asset('barista/assets/star.svg') }}" alt="Estrela Depo"></li>
+                    <li><img src=" {{ asset('barista/assets/star.svg') }}" alt="Estrela Depo"></li>
+                    <li><img src=" {{ asset('barista/assets/star.svg') }}" alt="Estrela Depo"></li>
+                    <li><img src=" {{ asset('barista/assets/star.svg') }}" alt="Estrela Depo"></li>
                 </ul>
             </div>
             <div class="dadosDepo">
                 <p>Participar do Workshop de Métodos foi uma experiência incrível. Aprendi na prática como cada
                     técnica influencia no sabor e saí de lá preparando meu café com muito mais confiança.</p>
-                <img src=" {{ ('assets/mariana-alves.png') }}" alt="Foto Depoimento">
+                <img src=" {{ ('barista/assets/mariana-alves.png') }}" alt="Foto Depoimento">
                 <h4>Mariana Alves</h4>
                 <div>
                     <h5>Data: 05/11/2025</h5>
@@ -34,17 +34,17 @@
         <article>
             <div class="estrela">
                 <ul>
-                    <li><img src=" {{ ('assets/star.svg') }}" alt="Estrela Depo"></li>
-                    <li><img src=" {{ ('assets/star.svg') }}" alt="Estrela Depo"></li>
-                    <li><img src=" {{ ('assets/star.svg') }}" alt="Estrela Depo"></li>
-                    <li><img src=" {{ ('assets/star.svg') }}" alt="Estrela Depo"></li>
-                    <li><img src=" {{ ('assets/star.svg') }}" alt="Estrela Depo"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg') }}" alt="Estrela Depo"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg') }}" alt="Estrela Depo"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg') }}" alt="Estrela Depo"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg') }}" alt="Estrela Depo"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg') }}" alt="Estrela Depo"></li>
                 </ul>
             </div>
             <div class="dadosDepo">
                 <p>A Noite do Café Especial superou minhas expectativas. Foi uma verdadeira imersão sensorial,
                     com aromas e sabores que eu nunca tinha experimentado antes.</p>
-                <img src=" {{ ('assets/ricardo-mendes.png') }}" alt="Foto Depoimento">
+                <img src=" {{ ('barista/assets/ricardo-mendes.png') }}" alt="Foto Depoimento">
                 <h4>Ricardo Mendes</h4>
                 <div>
                     <h5>Data: 22/11/2025</h5>
@@ -58,17 +58,17 @@
         <article>
             <div class="estrela">
                 <ul>
-                    <li><img src=" {{ ('assets/star.svg" alt="Estrela Depo') }}"></li>
-                    <li><img src=" {{ ('assets/star.svg" alt="Estrela Depo') }}"></li>
-                    <li><img src=" {{ ('assets/star.svg" alt="Estrela Depo') }}"></li>
-                    <li><img src=" {{ ('assets/star.svg" alt="Estrela Depo') }}"></li>
-                    <li><img src=" {{ ('assets/star.svg" alt="Estrela Depo') }}"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg" alt="Estrela Depo') }}"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg" alt="Estrela Depo') }}"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg" alt="Estrela Depo') }}"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg" alt="Estrela Depo') }}"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg" alt="Estrela Depo') }}"></li>
                 </ul>
             </div>
             <div class="dadosDepo">
                 <p>O curso de Barista foi transformador. A equipe da Casa do Barista é extremamente atenciosa e
                     domina o assunto. Hoje preparo cafés com técnica e paixão.</p>
-                <img src="{{ ('assets/fernanda-souza.png') }}" alt="Foto Depoimento">
+                <img src="{{ ('barista/assets/fernanda-souza.png') }}" alt="Foto Depoimento">
                 <h4>Fernanda Souza</h4>
                 <div>
                     <h5>Data: 18/10/2025</h5>
@@ -82,16 +82,16 @@
         <article>
             <div class="estrela">
                 <ul>
-                    <li><img src=" {{ ('assets/star.svg" alt="Estrela Depo') }}"></li>
-                    <li><img src=" {{ ('assets/star.svg" alt="Estrela Depo') }}"></li>
-                    <li><img src=" {{ ('assets/star.svg" alt="Estrela Depo') }}"></li>
-                    <li><img src=" {{ ('assets/star.svg" alt="Estrela Depo') }}"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg" alt="Estrela Depo') }}"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg" alt="Estrela Depo') }}"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg" alt="Estrela Depo') }}"></li>
+                    <li><img src=" {{ ('barista/assets/star.svg" alt="Estrela Depo') }}"></li>
                 </ul>
             </div>
             <div class="dadosDepo">
                 <p>A combinação de música ao vivo com cafés especiais criou um ambiente acolhedor e sofisticado.
                     Uma experiência perfeita para relaxar e apreciar bons momentos.</p>
-                <img src=" {{ ('assets/mariana-alves.png') }}" alt="Foto Depoimento">
+                <img src=" {{ ('barista/assets/mariana-alves.png') }}" alt="Foto Depoimento">
                 <h4>Carlos Henrique Lima</h4>
                 <div>
                     <h5>Data: 12/12/2025</h5>
