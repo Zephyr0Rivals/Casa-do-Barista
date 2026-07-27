@@ -1,5 +1,13 @@
 <section class="banner">
-    <img src="{{ asset('barista/assets/banner1.png') }}" alt="Banner 1">
-    <img src="{{ asset('barista/assets/banner2.png') }}" alt="Banner 2">
-    <img src="{{ asset('barista/assets/banner3.png') }}" alt="Banner 3">
+    
+    @foreach ($listaBanner as $item)
+
+        <img src="{{" asset('barista/assets/slinha->imagem_banner") }}" alt="{{ $linha->titulo_banner }}">
+        
+    @endforeachor
+
+    // if there's the possibility of a zero value
+
+
+    
 </section>
