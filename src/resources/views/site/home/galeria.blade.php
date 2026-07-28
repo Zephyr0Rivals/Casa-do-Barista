@@ -5,17 +5,9 @@
             </header>
 
             <div class="itensGaleria">
-                <img src="{{ asset('assets/galeria01.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('assets/galeria02.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('assets/galeria03.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('assets/galeria04.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('assets/galeria05.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('assets/galeria06.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('assets/galeria01.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('assets/galeria02.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('assets/galeria03.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('assets/galeria04.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('assets/galeria05.png') }}" alt="Galeria - Casa do Barista">
-                <img src="{{ asset('assets/galeria06.png') }}" alt="Galeria - Casa do Barista">
+                @foreach ($listaGaleria as $Galeira)
+                    <img src="{{ asset("barista/assets/$linha->imagem_galeria") }}" alt=" $linha->titulo_banner ">
+                @endforeach
+                
             </div>
         </section>
