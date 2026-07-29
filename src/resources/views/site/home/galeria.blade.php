@@ -5,8 +5,8 @@
             </header>
 
             <div class="itensGaleria">
-                @foreach ($listaGaleria as $Galeira)
-                    <img src="{{ asset("barista/assets/$linha->imagem_galeria") }}" alt=" $linha->titulo_banner ">
+                @foreach ($listaGaleria as $linha)
+                    <img src="{{ asset("barista/assets/$linha->imagem_galeria") }}" alt=" $linha->titulo_galeria ">
                 @endforeach
                 
             </div>

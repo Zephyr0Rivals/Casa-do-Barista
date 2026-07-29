@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Cliente;
 use illuminate\Database\Eloquent\Model;
 
 Class Depoimento extends Model{
@@ -10,8 +11,13 @@ Class Depoimento extends Model{
     protected $primaryKey = 'id_depoimento';
     public $timestamps = true;
 
-    const CREATE_AT = 'data_criacao_depoimento';
+    const CREATED_AT = 'data_criacao_depoimento';
     const UPDATED_AT = 'data_atualizacao_depoimento';
+
+    protected $casts = [
+        'data_criacao_depoimento' => 'datetime',
+        'data_atualizacao_depoimento' => 'datetime',
+    ];
 
     protected $fillable = [
         'id_cliente',

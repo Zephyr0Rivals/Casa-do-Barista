@@ -26,16 +26,16 @@
             <article>
                 <div class="estrela">
                     <ul>
-                        @for ($i = 1; $i <= $5; $i++)
-                            <li> class="{{ $i <= $estrela ? 'estrela-ativa' : 'estrela-inativa' }}"> 
-                                <img src= "{{ asset('barista/assets/star.svg') }}" alt="{{ $i <=estrela ? 'Estrela preenchida' : 'Estrela não preenchida'}}">
+                        @for($i = 1; $i <= 5; $i++)
+                            <li class="{{ $i <= $estrela ? 'estrela-ativa' : 'estrela-inativa' }}"> 
+                                <img src= "{{ asset('barista/assets/star.svg') }}" alt="{{ $i <= $estrela ? 'Estrela preenchida' : 'Estrela não preenchida'}}">
                             </li>
                         @endfor
                     </ul>
                 </div>
                 <div class="dadosDepo">
                     <p> {{ $linha->descricao_depoimento}} </p>
-                    <img src="{{ asset('barista/assets/'. $cliente->foto_cliente)}}" alt="{{$cliente->nome_cliente}}">
+                    <img src="{{ asset('barista/assets/'. $cliente->foto_cliente)}}" alt="{{ $cliente->nome_cliente }}">
                     <h4>{{ $cliente->nome_cliente }}</h4>
                     <div>                                           
                         <h5>Data: {{ $linha->data_criacao_depoimento ? $linha->data_criacao_depoimento->format('d/m/Y') : 'Data não informada'}}</h5>
@@ -43,14 +43,13 @@
                     </div>
                 </div>
 
-        </article>
+            </article>
     
         
         @empty
             
         @endforelse
        
-<div> 
-
+    <div> 
 </section>
  

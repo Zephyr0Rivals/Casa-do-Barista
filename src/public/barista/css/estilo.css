@@ -658,12 +658,12 @@ p {
   width: 20px;
 }
 
-.estrela-ativa{
+.estrela-ativa {
   opacity: 1;
 }
 
-.estrela-inativa{
-  opacity: 0,2;
+.estrela-inativa {
+  opacity: 0.2;
 }
 
 

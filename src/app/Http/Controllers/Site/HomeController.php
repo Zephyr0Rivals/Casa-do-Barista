@@ -18,20 +18,20 @@ class HomeController extends Controller{
         $listaBanner =  Banner::where('status_banner', 'ATIVO')->inRandomOrder()->get();
 
         //dd($listaBanner);
-        //var dump[SListaBanner];
+        //var dump[$listaBanner];
 
 
         //BUSCAR OS DEPOIMENTO 'APROVADOS' JUNTO COM OS 'DADOS DO CLIENTE'
         $listaDepo = Depoimento::with('DepoimentoCliente')
-                                    ->where('status_depoimento', 'APROVADO')
-                                    ->orderByDesc('id_depoimento')
-                                    ->get();
+                                ->where('status_depoimento', 'APROVADO')
+                                ->orderByDesc('id_depoimento')
+                                ->get();
         //dd($listaDepo->toArray());
 
         //Buscar a lista da galeria para exibir na HOME
-        $listaGaleria = Galeria::where('status_galeira', 'ATIVO')->inRandomOrder()->get();
+        $listaGaleria = Galeria::where('status_galeria', 'ATIVO')->inRandomOrder()->get();
 
-        return view('site.home.home', compact('listaBanner' ,'listaDepo')); 
+        return view('site.home.home', compact('listaBanner' ,'listaDepo', 'listaGaleria')); 
     }
 
 
