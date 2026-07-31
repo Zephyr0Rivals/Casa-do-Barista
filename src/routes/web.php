@@ -12,3 +12,4 @@ Route::get('/sobre', [SobreController::class, 'sobre'])->name('sobre');
 Route::get('/eventos', [EventosController::class, 'eventos'])->name('eventos');
 Route::get('/contato', [ContatoController::class, 'contato'])->name('contato');
 Route::get('/cardapio', [CardapioController::class, 'cardapio'])->name('cardapio');
+Route::get('/cardapio/categoria/{idCategoria}', [CardapioController::class, 'cardapio'])->name('cardapio.categoria');
