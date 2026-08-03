@@ -11,15 +11,15 @@ class CardapioController extends Controller
     
     public function cardapio(?int $idCategoria = null){
 
-        return view('site.cardapio.cardapio');
-        $listaCategoria = Categoria::where('status_categoria', 'ATIVO')->orderBy('nome_categoria')->get();
+        //return view('site.cardapio.cardapio');
+        $listaCategorias = Categoria::where('status_categoria', 'ATIVO')->orderBy('nome_categoria')->get();
 
         // SE nenhuma categoria estiver na URL 
         //Go back to the default first (primeira padrão)
         if($idCategoria === null){
-            $categoriaSelecionada = $listaCategoria->first();
+            $categoriaSelecionada = $listaCategorias->first();
         }else{
-            $categoriaSelecionada = $listaCategoria->firstwhere('id_categoria', $idCategoria);
+            $categoriaSelecionada = $listaCategorias->firstwhere('id_categoria', $idCategoria);
         }
 
         // Casa não tenha a categoria

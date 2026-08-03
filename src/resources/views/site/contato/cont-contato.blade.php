@@ -1,13 +1,6 @@
  <section class="contato">
             <h2>Casa do Barista</h2>
             <h3>
-                <?php
-                if ($ok == 1) {
-                    echo $nome . ", sua mensagem foi enviada com sucesso!";
-                } elseif ($ok == 2) {
-                    echo $nome . ", não foi possível enviar sua mensagem";
-                }
-                ?>
             </h3>
             <div class="site">
 

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
-use App\Models\Banner;
 use App\Models\Depoimento;
 use App\Models\Galeria;
 
@@ -15,7 +14,7 @@ class HomeController extends Controller{
 
 
         //Busque a lista de banner para exibit na Home (Views)
-        $listaBanner =  Banner::where('status_banner', 'ATIVO')->inRandomOrder()->get();
+        //$listaBanner =  Banner::where('status_banner', 'ATIVO')->inRandomOrder()->get();
 
         //dd($listaBanner);
         //var dump[$listaBanner];
@@ -31,7 +30,7 @@ class HomeController extends Controller{
         //Buscar a lista da galeria para exibir na HOME
         $listaGaleria = Galeria::where('status_galeria', 'ATIVO')->inRandomOrder()->get();
 
-        return view('site.home.home', compact('listaBanner' ,'listaDepo', 'listaGaleria')); 
+        return view('site.home.home', compact('listaDepo', 'listaGaleria')); 
     }
 
 

@@ -6,7 +6,7 @@
      @include('site.home.eventos')
 
     <!-- INÍCIO DA SEÇÃO DEPOIMENTO -->
-    @include('site.home.depoimento')
+
     
 
 @endsection

@@ -4,14 +4,14 @@
 
 
      <!-- Inicio Banner -->
-        @include('site.home.banner')
+      @include('site.home.banner')
 
-        <!-- CONTEÚDO CONTATO -->
-        @include('site.contato.cont-contato')
+      <!-- CONTEÚDO CONTATO -->
+      @include('site.contato.cont-contato')
 
 
-        <!-- MAPA CONTATO -->
-         @include('site.contato.home')
+      <!-- MAPA CONTATO -->
+      @include('site.contato.map')
         
 
 @endsection 

@@ -33,7 +33,7 @@
     
         <div class="site card-cardapio">
 
-            @foreach ($produto as $linha)
+            @foreach ($produtos as $linha)
             
             <div class="card-flip  wow animate__animated animate__fadeInUp">
             <article class="card-flip-miolo">

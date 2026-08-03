@@ -537,7 +537,7 @@ p {
   font-family: var(--fonte-titulo);
   -webkit-text-stroke: 1px var(--cor-fundo-1);
   position: relative;
-  z-index: 1;
+  /*z-index: 1;*/
 }
 
 .flip2 {
