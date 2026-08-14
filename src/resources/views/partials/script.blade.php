@@ -7,6 +7,6 @@
 
     <!-- ANIMAÇÃO WOW -->
     <script src="{{ asset('barista/js/wow.min.js') }}"></script>
-
+ 
     <!-- MEU SCRIPT (ANIMAÇÃO) -->
     <script src="{{ asset('barista/js/script.js') }}"></script>
