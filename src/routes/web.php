@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Dash\DashController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Site\CardapioController;
 use App\Http\Controllers\Site\ContatoController;
 use App\Http\Controllers\Site\EventosController;
@@ -18,4 +18,4 @@ Route::get('/cardapio/categoria/{idCategoria}', [CardapioController::class, 'car
 
 
 //CONTEUDO AUS DASHBOARD
-Route::get('/dash', [DashController::class, 'dash'])->name('dash');
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
