@@ -3,12 +3,12 @@
 <head>
     //aqui esta o partials
 
-    @include('partials.head')
+    @include('partials.site.head')
 </head>
 
 <body>
 // Header
-    @include('partials.topo')
+    @include('partials.site.topo')
 
 // Main 
 <main>
@@ -18,10 +18,10 @@
 </main>
 
     // Footer
-    @include('partials.rodape')
+    @include('partials.site.rodape')
 
     // Scripts
-    @include('partials.script')
+    @include('partials.site.script')
 </body>
 
 <</html>

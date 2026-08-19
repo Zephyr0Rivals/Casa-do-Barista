@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
         //Carregar um submenu de categoria
-        View::composer('partials.topo', function ($view){
+        View::composer('partials.site.topo', function ($view){
 
             $categoriaMenu = Categoria::query()
             ->where('status_categoria', 'ATIVO')

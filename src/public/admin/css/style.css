@@ -1,0 +1,17 @@
+.app-main{
+    background-image: url('admin/assets/deer.jpeg');
+}
+
+.app-sidebar{
+    background-color: #0b0b0b !important;
+}
+
+.sidebar-brand{
+    height: 130px;
+}
+
+.sidebar-brand .brand-link .brand-image{
+    width: 130px;
+    max-height: none;
+
+}
