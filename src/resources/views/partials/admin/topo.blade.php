@@ -1,4 +1,4 @@
-<nav class="app-header navbar navbar-expand bg-body">
+<nav class="app-header navbar navbar-expand">
         <!--begin::Container-->
         <div class="container-fluid">
           <!--begin::Start Navbar Links-->
@@ -31,7 +31,7 @@
           <!--end::Start Navbar Links-->
 
           <!--begin::Navbar Search-->
-          <form
+          {{-- <form
             class="navbar-search d-none d-md-block ms-3"
             role="search"
             action="./pages/search-results.html"
@@ -49,7 +49,7 @@
                 <i class="bi bi-search" aria-hidden="true"></i>
               </button>
             </div>
-          </form>
+          </form> --}}
           <!--end::Navbar Search-->
 
           <!--begin::End Navbar Links-->

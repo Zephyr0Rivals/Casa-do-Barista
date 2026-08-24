@@ -3,7 +3,7 @@
               <!--begin::Col-->
               <div class="col-lg-3 col-6">
                 <!--begin::Small Box Widget 1-->
-                <div class="small-box text-bg-primary">
+                <div class="small-box text-bg-primary card-estilo">
                   <div class="inner">
                     <h3>150</h3>
 

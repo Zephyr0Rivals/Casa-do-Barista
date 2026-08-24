@@ -1,6 +1,70 @@
-.app-main{
-    background-image: url('admin/assets/deer.jpeg');
+/*GOOGLE */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
+@font-face {
+  font-family: "Geometry Soft Pro-Bold N";
+    src: url(/barista/fonts/Geometry-Soft\ Pro-Bold\ N.otf) format("opentype"); 
+  font-weight: 700;
+  font-style: normal;
 }
+
+:root {
+/*  */
+  /* CORES */
+  --cor-fundo-1: #F3E8DC;
+  --cor-fundo-2: #2e2e2e;
+  --cor-primaria: #4b2e1e;
+  --cor-secundaria-1: #8b5e3c;
+  --cor-secundaria-2: #b56a34;
+  --cor-destaque: #5c6945;
+
+  --cor-texto: #2e2e2e;
+  --cor-titulo: #4b2e1e;
+  --cor-subtitulo: #8b5e3c;
+
+
+  /* FONTES */
+  --fonte-texto: "Bebas Neue", sans-serif;
+  --fonte-titulo: "Geometry Soft Pro-Bold N";
+
+}
+
+/* Corpo do site */
+body {
+    font-family: var(--fonte-titulo);
+   
+}
+/* Final do Corpo do site */
+
+/* padrões de tag */
+
+p {
+    font-family: var(--fonte-texto);
+    color: var(--cor-subtitulo);
+    font-size: 18px;
+}
+
+
+/* menu-lateral */
+
+.navbar{
+    background-color: #0b0b0b;
+}
+
+.sidebar-menu .nav-header {
+  font-size: 20px;  
+}
+
+/* final menu-lateral */
+
+/* cor de fundo */
+
+.app-main {
+    background-color: var(--cor-fundo-1);
+}
+
+/* cor de fundo */
 
 .app-sidebar{
     background-color: #0b0b0b !important;
@@ -15,3 +79,32 @@
     max-height: none;
 
 }
+
+.dashboard-main-title {
+    color: var(--cor-titulo);
+
+}
+
+.row h1 {
+    color: var(--cor-titulo);
+}
+
+/* icones do menu-lateral */
+
+.icone-vazio {
+    color: var(--cor-destaque);
+    transition: 0.5s ease-out;
+}
+
+.nav-link:hover .icone-vazio{
+    color: yellow;
+}
+/* icones do menu-lateral*/
+
+/* cards do menu */
+
+.card-estilo {
+    color: black;
+}
+
+/* final cards do menu */

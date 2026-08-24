@@ -19,7 +19,7 @@
         @include('site.home.equipe')
 
         <!-- INÍCIO DA SEÇÃO EVENTO -->
-        @include('site.home.equipe')
+        @include('site.home.eventos')
        
         <!-- INÍCIO DA SEÇÃO GALERIA -->
         @include('site.home.galeria')

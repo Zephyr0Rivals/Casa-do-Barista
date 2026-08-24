@@ -2,7 +2,7 @@
 
 @section('content')
  
-   <h1>DASHBOARD</h1>
+   <h1 class="dashboard-main-title">DASHBOARD</h1>
    
     
 
