@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Depoimento;
+use App\Models\Venda;
 use illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model{
@@ -19,13 +20,18 @@ class Cliente extends Model{
         'email_cliente',
         'senha_cliente',
         'foto_cliente',
-        'status_cliente'
+        'status_cliente',
     ];
 
-    //UM CLIENTE PERTENCE A MUITOS DEPOIMENTOS
+    //UM CLIENTE PODE TER MUITOS DEPOIMENTOS
 
     public function ClienteDepoimento(){
         return $this->hasMany(Depoimento::class, 'id_cliente', 'id_cliente');
     }
+    // UM CLIENTE PODE TER MUITAS VENDAS 
+    public function ClienteVenda(){
+        return $this->hasMany(Venda::class, 'id_cliente', 'id_cliente');
+    }
+
 
 }

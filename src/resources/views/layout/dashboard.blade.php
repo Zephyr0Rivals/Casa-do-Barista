@@ -50,9 +50,6 @@
         <div class="app-content">
           <!--begin::Container-->
           <div class="container-fluid">
-            <!--Begin::Row-->
-            @include('admin.dashboard.cards')
-            <!--end::row-->
             <!--CONTEÚDO DO DASHBOARD-->
               <main>
                  @yield('content')

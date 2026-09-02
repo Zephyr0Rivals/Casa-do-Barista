@@ -30,5 +30,8 @@ Class Depoimento extends Model{
     // Um cliente pode possuir muitos depoimentos
     public function DepoimentoCliente(){
         return$this->belongsTo(Cliente::class, 'id_cliente', 'id_cliente');
-    }
+   }
+
 }
+
+ 

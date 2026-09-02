@@ -96,6 +96,10 @@ p {
     transition: 0.5s ease-out;
 }
 
+.icone-vazio1{
+    color: yellow;
+}
+
 .nav-link:hover .icone-vazio{
     color: yellow;
 }
@@ -104,7 +108,67 @@ p {
 /* cards do menu */
 
 .card-estilo {
-    color: black;
+    background-color: black;
 }
 
 /* final cards do menu */
+
+/** BOTÃO 'MOSTRAR MAIS' DEPOIMENOTS */
+
+    /* A caixinha que segura o texto completo começa trancada e sem altura */
+    .texto-completo-container{
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 0.4s ease-out; /*! Controla a velocidade (0.4 segundos) */
+        overflow: hidden;
+    }
+
+
+     /* Texto completo começa excondido */
+    .texto-completo{
+        min-height: 0;
+        /* display: none; */
+    }
+
+    /*  Texto Curto aparece normalmente */
+    .texto-curto{
+        display: inline;
+    } 
+
+    /** --- QUANDO A CAIXA FOR EXPANDIDA ---   */
+    
+        /* ? Cortina se abre suavemente mostrando o texto inteiro */
+        .texto-container.expandido .texto-completo-container {
+            grid-template-rows: 1fr;
+        }
+
+        /* ? O texto curto some suavemente para dar espaço ao textão abaixo */
+        .texto-container.expandido .texto-curto {
+            display: none;
+        }
+
+
+    /*? Classe auxilliar que o JS vai usar para !controlar o desaparecimento e aparecimento */
+    /* .texto-container.expandido .texto-curto {
+        display: none;
+    } */
+
+    /* .texto-container.expandido .texto-completo {
+        display: inline;
+    } */
+
+    .btn-expandir{
+        background: none;
+        border: none;
+        color:var(--cor-destaque);
+        cursor: pointer;
+        padding: 0;
+        margin-left: 5px;
+
+        
+
+    }
+
+/** FINAL BOTÃO 'MOSTRAR MAIS' DEPOIMENOTS */
+
+

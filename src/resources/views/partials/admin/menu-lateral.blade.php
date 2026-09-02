@@ -30,7 +30,7 @@
               id="navigation"
             >
               <li class="nav-item menu-open">
-                <a href="#" class="nav-link active">
+                <a href=" {{ route('dashboard')}}" class="nav-link active">
                   <i class="nav-icon bi bi-speedometer icone-vazio"></i>
                   <p>
                     Dashboard
@@ -78,13 +78,13 @@
 
               <li class="nav-header">SITE</li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon bi bi-circle-fill icone-vazio"></i>
+                <a href="{{ route('admin.banner.index') }}" class="nav-link">
+                  <i class="nav-icon bi bi-circle-fill icone-vazio1"></i>
                   <p>BANNER</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.galeria.index')}}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill icone-vazio"></i>
                   <p>
                     GALERIA
@@ -92,7 +92,7 @@
                   </p>
                 </a>
                 <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.depoimento.index')}}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill icone-vazio"></i>
                   <p>
                     DEPOIMENTOS
@@ -102,13 +102,13 @@
              
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.linhadotempo.index')}}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill icone-vazio"></i>
                   <p>LINHA DO TEMPO</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.newsletter.index')}}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill icone-vazio"></i>
                   <p>NEWSLETTER</p>
                 </a>
