@@ -7,13 +7,13 @@
             <!--begin::Row-->
             <div class="row">
               <div class="col-sm-6">
-                <h1 class="mb-0 fs-3">depoimento</h1>
+                <h1 class="mb-0 fs-3">Clientes</h1>
               </div>
               <div class="col-sm-6">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb float-sm-end">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">depoimento</li>
+                    <li class="breadcrumb-item active" aria-current="page">Clientes</li>
                   </ol>
                 </nav>
               </div>
@@ -40,7 +40,7 @@
                   <div class="card-header">
                     <div class="row g-2 align-items-center">
                       <div class="col-12 col-md-4">
-                        <h3 class="card-title">Depoimentos cadastrados</h3>
+                        <h3 class="card-title">Clientes cadastrados</h3>
                       </div>
                       <div class="col-12 col-md-8">
                         <div class="d-flex flex-wrap justify-content-md-end gap-2">
@@ -50,21 +50,21 @@
                             </span>
                             <input
                               type="search"
-                              id="depoimento-search"
+                              id="nome_cliente"
                               class="form-control"
-                              placeholder="Pesquisar Depoimentos"
-                              aria-label="Pesquisar Depoimentos"
+                              placeholder="Pesquisar Clientes"
+                              aria-label="Pesquisar Clientes"
                               style="width: 180px"
                             />
                           </div>
                           <select
-                            id="depoimento-role-filter"
+                            id="cliente-role-filter"
                             class="form-select form-select-sm w-auto"
                             aria-label="Filter by role"
                           >
-                            <option value="all" selected>Todas</option>
-                            <option value="ativo">Ativas</option>
-                            <option value="inativo">Inativas</option>
+                            <option value="all" selected>Todos</option>
+                            <option value="ativo">Ativos</option>
+                            <option value="inativo">Inativos</option>
                             
                           </select>
                           <button
@@ -74,7 +74,7 @@
                             data-bs-target="#modal-add-user"
                           >
                             <i class="bi bi-person-plus-fill me-1" aria-hidden="true"> </i>
-                            Nova Imagem
+                            Novo Cliente
                           </button>
                         </div>
                       </div>
@@ -89,26 +89,26 @@
                           <tr>
                             <th>Código</th>
                             <th>Imagem</th>
-                            <th>Título</th>
-                            <th>Descrição</th>
-                            <th>Nota</th>                           
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Senha</th>
                             <th>Status</th>
                             <th class="text-end">Ações</th>
                           </tr>
                         </thead>
                         <tbody>
-                        @forelse($listaDepoimento as $depoimento) 
+                        @forelse($listaCliente as $cliente) 
                           <tr>
                             {{-- ID --}}
                             <td>
-                              {{ $depoimento->id_depoimento }}
+                              {{ $cliente->id_cliente }}
                             </td>
                                 {{-- Imagem --}}
                             <td>
-                              @if($depoimento->DepoimentoCliente && $depoimento->DepoimentoCliente->foto_cliente)
+                              @if($cliente->foto_cliente)
                                 <img
-                                  src="{{ asset('barista/assets/' . $depoimento->DepoimentoCliente->foto_cliente) }}"
-                                  alt="{{ $depoimento->titulo_depoimento }}"
+                                  src="{{ asset('barista/assets/' . $cliente->foto_cliente) }}"
+                                  alt="{{ $cliente->nome_cliente }}"
                                   class="rounded"
                                   style="
                                       width: 100px;
@@ -122,39 +122,37 @@
                                     </span>      
                               @endif
                             </td>
-                            {{-- TITULO --}}
+                            {{-- NOME --}}
                             <td>
                               <span class="badge text-bg-success">
-                                {{ $depoimento->titulo_depoimento }}
+                                {{ $cliente->nome_cliente }}
                               </span>
                             </td>
 
-                            {{-- DESCRIÇÃO --}}
+                            {{-- EMAIL --}}
                             <td>
                               <span>
-                                {{ $depoimento->descricao_depoimento}}
+                                {{ $cliente->email_cliente }}
                               </span>
                             </td>
-                            
 
-                            {{-- NOTA --}}
+                            {{-- SENHA --}}
                             <td>
                               <span>
-                                {{ $depoimento->nota_depoimento}}
+                                {{ $cliente->senha_cliente }}
                               </span>
                             </td>
-                            
 
-                            {{-- STATUS --}}
+                              {{-- STATUS --}}
 
                             <td>
-                              @if($depoimento->status_depoimento === 'APROVADO')
+                              @if($cliente->status_cliente === 'ATIVO')
                                 <span class="badge text-bg-success">
-                                    APROVADO
+                                    ATIVO
                                 </span>
                               @else
                                 <span class="badge text-bg-warning">
-                                    PENDENTE
+                                    INATIVO
                                 </span>
                               @endif
                             </td>
@@ -174,7 +172,7 @@
                                   type="button"
                                   class="btn btn-outline-danger"
                                   data-bs-toggle="modal"
-                                  data-bs-target="#modal-delete-depoimento"
+                                  data-bs-target="#modal-delete-Cliente"
                                   aria-label="Deletar"
                                 >
                                   <i class="bi bi-trash" aria-hidden="true"> </i>
@@ -187,7 +185,7 @@
                                 <td colspan="5"
                                     class="text-center py-4 text-muted">
                                     
-                                    Nenhum depoimento cadastrado.
+                                    Nenhum Cliente cadastrado.
                                 </td>
                             </tr>
                         @endforelse
@@ -200,9 +198,9 @@
                   <!--begin::Card Footer-->
                   <div class="card-footer clearfix">
                     <div class="float-start pt-1 fs-7 text-body-secondary">
-                     Total de depoimentos:
+                     Total de Clientes:
                      <strong>
-                        {{ $listaDepoimento->count()}}
+                        {{ $listaCliente->count()}}
                      </strong>
                     </div>
                     <ul class="pagination pagination-sm m-0 float-end">
@@ -249,7 +247,7 @@
                 <div class="modal-content">
                   <form>
                     <div class="modal-header">
-                      <h5 class="modal-title" id="modal-add-depoimento-label">Add new depoimento</h5>
+                      <h5 class="modal-title" id="modal-add-Cliente-label">Add new Cliente</h5>
                       <button
                         type="button"
                         class="btn-close"
@@ -263,17 +261,17 @@
                         <input
                           type="text"
                           class="form-control"
-                          id="new-depoimento-name"
+                          id="new-Cliente-name"
                           placeholder="e.g. Jane Doe"
                           required
                         />
                       </div>
                       <div class="mb-3">
-                        <label for="new-depoimento-email" class="form-label"> Email address </label>
+                        <label for="new-Cliente-email" class="form-label"> Email address </label>
                         <input
                           type="email"
                           class="form-control"
-                          id="new-depoimento-email"
+                          id="new-Cliente-email"
                           placeholder="name@example.com"
                           required
                         />
@@ -333,7 +331,7 @@
                   </div>
                   <div class="modal-body">
                     <p class="mb-0">
-                      Are you sure you want to delete this depoimento? All content owned by the account
+                      Are you sure you want to delete this Cliente? All content owned by the account
                       will be reassigned to the site administrator. This action cannot be undone.
                     </p>
                   </div>
@@ -342,7 +340,7 @@
                       Cancel
                     </button>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                      Delete depoimento
+                      Delete Cliente
                     </button>
                   </div>
                 </div>

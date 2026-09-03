@@ -65,7 +65,7 @@
                 
               </li>
                  <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('admin.vendas.cliente.index')}}" class="nav-link">
                       <i class="nav-icon bi bi-circle-fill icone-vazio"></i>
                       <p>
                         CLIENTES
@@ -79,7 +79,7 @@
               <li class="nav-header">SITE</li>
               <li class="nav-item">
                 <a href="{{ route('admin.banner.index') }}" class="nav-link">
-                  <i class="nav-icon bi bi-circle-fill icone-vazio1"></i>
+                  <i class="nav-icon bi bi-circle-fill icone-vazio"></i>
                   <p>BANNER</p>
                 </a>
               </li>

@@ -96,10 +96,6 @@ p {
     transition: 0.5s ease-out;
 }
 
-.icone-vazio1{
-    color: yellow;
-}
-
 .nav-link:hover .icone-vazio{
     color: yellow;
 }
