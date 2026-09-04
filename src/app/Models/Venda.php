@@ -18,6 +18,7 @@ Class Venda extends Model{
         'data_hora_venda',
         'valor_total_venda',
         'forma_pagamento_venda',
+        'id_cliente',
         'status_venda',
         'observacao_venda',
         

@@ -11,11 +11,13 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\ClienteController;
 use App\Http\Controllers\Admin\DepoimentoController;
 use App\Http\Controllers\Admin\GaleriaController;
 use App\Http\Controllers\Admin\LinhaTempoController;
 use App\Http\Controllers\Admin\NewsletterController;
+// use App\Http\Controllers\Admin\VendaController;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/sobre', [SobreController::class, 'sobre'])->name('sobre');
@@ -34,3 +36,5 @@ Route::get('/admin/depoimento', [DepoimentoController::class, 'index'])->name('a
 Route::get('/admin/linhatempo', [LinhaTempoController::class, 'index'])->name('admin.linhadotempo.index');
 Route::get('/admin/newsletter', [NewsletterController::class, 'index'])->name('admin.newsletter.index');
 Route::get('/admin/vendas/cliente', [ClienteController::class, 'index'])->name('admin.vendas.cliente.index');
+// Route::get('/admin/vendas/venda', [VendaController::class, 'index'])->name('admin.vendas.venda.index');
+Route::get('/admin/produtos/categoria', [CategoriaController::class, 'index'])->name('admin.produtos.categoria.index');

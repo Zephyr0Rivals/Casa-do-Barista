@@ -47,7 +47,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./users.html" class="nav-link">
+                <a href="{{route('admin.produtos.categoria.index')}}" class="nav-link">
                   <i class="nav-icon bi bi-circle-fill icone-vazio"></i>
                   <p>CATEGORIAS</p>
                 </a>

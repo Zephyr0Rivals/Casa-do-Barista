@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    //aqui esta o partials
+    {{-- aqui esta o partials --}}
 
     @include('partials.site.head')
 </head>
 
 <body>
-// Header
+{{--  Header --}}
     @include('partials.site.topo')
 
-// Main 
+{{-- Main  --}}
 <main>
-    // Area Conteudo
+    {{--  Area Conteudo --}}
     
     @yield('content')
 </main>
 
-    // Footer
+    {{-- Footer --}}
     @include('partials.site.rodape')
 
-    // Scripts
+    {{-- Scripts --}}
     @include('partials.site.script')
 </body>
 
