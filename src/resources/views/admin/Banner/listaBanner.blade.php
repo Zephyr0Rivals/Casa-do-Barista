@@ -229,9 +229,16 @@
             >
               <div class="modal-dialog">
                 <div class="modal-content">
-                  <form>
+
+                <!-- FORMA DE CADASTRO -->
+                  <form
+                    action="{{ route('admin.banner.store') }}"
+                    method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+
                     <div class="modal-header">
-                      <h5 class="modal-title" id="modal-add-banner-label">Add new banner</h5>
+                      <h5 class="modal-title" id="modal-add-banner-label">Colocar um banner novo</h5>
                       <button
                         type="button"
                         class="btn-close"
@@ -239,35 +246,43 @@
                         aria-label="Close"
                       ></button>
                     </div>
+
                     <div class="modal-body">
                       <div class="mb-3">
-                        <label for="new-user-name" class="form-label"> Full name </label>
+                        <label for="new-banner-name" class="form-label"> Nome do banner </label>
                         <input
                           type="text"
                           class="form-control"
                           id="new-banner-name"
-                          placeholder="e.g. Jane Doe"
+                          placeholder="promoção de verão"
                           required
+                          name="titulo-banner"
                         />
                       </div>
+
                       <div class="mb-3">
-                        <label for="new-banner-email" class="form-label"> Email address </label>
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="new-banner-email"
-                          placeholder="name@example.com"
-                          required
-                        />
-                        <div class="form-text">The invitation will be sent to this address.</div>
+                      
+                    
+                        <label for="img-banner" class="form-label"> Selecione uma Imagem</label>
+                        <input type="file" class="form-control input-banner" id="img-banner" accept="image/*" required>
+                        
+                      <label for="img-banner" class="banner-upload">
+                       
+                        <img id="ver-banner" src="{{ asset('admin/assets/img/sem-banner.svg')}}" alt="Selecione uma imagem para o banner">
+
+                        <div class="banner-upload">
+                          <i class="bi bi-image"></i>
+                          <span>Clique para selecionar o banner</span>
+                        </div>
+
+                      </label>
                       </div>
+                      
                       <div class="mb-3">
-                        <label for="new-user-role" class="form-label"> Role </label>
-                        <select id="new-user-role" class="form-select">
-                          <option selected>Subscriber</option>
-                          <option>Author</option>
-                          <option>Editor</option>
-                          <option>Administrator</option>
+                        <label for="new-banner-role" class="form-label"> Status </label>
+                        <select id="new-banner-role" class="form-select" name="status_banner">
+                          <option value="ATIVO">ATIVO</option>
+                          <option value="INATIVO">INATIVO</option>
                         </select>
                       </div>
                       <div class="form-check">
@@ -286,7 +301,7 @@
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         Cancel
                       </button>
-                      <button type="submit" class="btn btn-primary">Create user</button>
+                      <button type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                   </form>
                 </div>
@@ -297,7 +312,7 @@
             <!--begin::Delete User Modal-->
             <div
               class="modal fade"
-              id="modal-delete-user"
+              id="modal-delete-banner"
               tabindex="-1"
               aria-labelledby="modal-delete-user-label"
               aria-hidden="true"
@@ -305,7 +320,7 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="modal-delete-user-label">Delete user</h5>
+                    <h5 class="modal-title" id="modal-delete-user-label">Deletar Banner</h5>
                     <button
                       type="button"
                       class="btn-close"
@@ -315,7 +330,7 @@
                   </div>
                   <div class="modal-body">
                     <p class="mb-0">
-                      Are you sure you want to delete this banner? All content owned by the account
+                     Você tem certeza de que quer deletar este Banner? All content owned by the account
                       will be reassigned to the site administrator. This action cannot be undone.
                     </p>
                   </div>
@@ -337,3 +352,20 @@
         <!--end::App Content-->
       </main>
       <!--end::App Main-->
+    
+<script>
+    const inputBanner = document.getElementById('img-banner');
+    const previewBanner = document.getElementById('ver-banner');
+ 
+    inputBanner.addEventListener('change', function() {
+ 
+        const arquivo = this.files[0];
+ 
+        if (arquivo) {
+ 
+            previewBanner.src = URL.createObjectURL(arquivo);
+ 
+        }
+ 
+    });
+</script>

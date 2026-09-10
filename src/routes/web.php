@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\LinhaTempoController;
 use App\Http\Controllers\Admin\NewsletterController;
 // use App\Http\Controllers\Admin\VendaController;
 
+// ROTAS WEB
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/sobre', [SobreController::class, 'sobre'])->name('sobre');
 Route::get('/eventos', [EventosController::class, 'eventos'])->name('eventos');
@@ -28,10 +29,36 @@ Route::get('/cardapio/categoria/{idCategoria}', [CardapioController::class, 'car
 
 
 
-//ESTRUTURA DA AREA DO DASHBOARD
-Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-Route::get('/admin/banner', [BannerController::class, 'index'])->name('admin.banner.index');
-Route::get('/admin/galeria', [GaleriaController::class, 'index'])->name('admin.galeria.index');
+//ROTAS ADMINISTRATIVAS
+Route::prefix('admin')->group(function (){
+
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    // CRUD BANNER
+    Route::get('/banner', [BannerController::class, 'index'])->name('admin.banner.index'); //Lista Banner
+    Route::post('/banner', [BannerController::class, 'store'])->name('admin.banner.store');// Cadastrar Banner
+    Route::get('/banner/{id}/editar', [BannerController::class, 'edit'])->name('admin.banner.edit');//Abrir o form de Editar banner
+    //Quer que você mude tudo, senão dará erro
+    Route::put('/banner/{id}', [BannerController::class, 'update'])->name('admin.banner.update');//Atualizar Banner 
+    //Permite você mudar só um valor
+    Route::patch('/banner/{id}/status', [BannerController::class, 'status'])->name('admin.banner.status');//Ativar o Desativar Banner
+
+    // CRUD GALERIA
+    Route::get('/galeria', [GaleriaController::class, 'index'])->name('admin.galeria.index'); //Lista Galeria
+
+    // CRUD DEPOIMENTO
+
+    // CRUD LINHA DO TEMPO
+
+    // CRUD NEWSLETTER
+
+    // CRUD CLIENTE
+
+    // CRUD CATEGORIA
+});
+
+
+
 Route::get('/admin/depoimento', [DepoimentoController::class, 'index'])->name('admin.depoimento.index');
 Route::get('/admin/linhatempo', [LinhaTempoController::class, 'index'])->name('admin.linhadotempo.index');
 Route::get('/admin/newsletter', [NewsletterController::class, 'index'])->name('admin.newsletter.index');
