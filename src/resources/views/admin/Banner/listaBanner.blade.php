@@ -230,12 +230,12 @@
               <div class="modal-dialog">
                 <div class="modal-content">
 
-                <!-- FORMA DE CADASTRO -->
+                {{-- FORMA DE CADASTRO  --}}
                   <form
                     action="{{ route('admin.banner.store') }}"
                     method="POST"
                     enctype="multipart/form-data">
-                    @csrf
+                    @csrf {{-- gera token aleatório --}}
 
                     <div class="modal-header">
                       <h5 class="modal-title" id="modal-add-banner-label">Colocar um banner novo</h5>
@@ -261,21 +261,19 @@
                       </div>
 
                       <div class="mb-3">
-                      
-                    
                         <label for="img-banner" class="form-label"> Selecione uma Imagem</label>
-                        <input type="file" class="form-control input-banner" id="img-banner" accept="image/*" required>
+                        <input type="file" class="form-control input-banner" id="img-banner" name="img-banner" accept="image/*" required>
                         
-                      <label for="img-banner" class="banner-upload">
+                        <label for="img-banner" class="banner-upload">
                        
-                        <img id="ver-banner" src="{{ asset('admin/assets/img/sem-banner.svg')}}" alt="Selecione uma imagem para o banner">
+                          <img id="ver-banner" src="{{ asset('admin/assets/img/sem-banner.svg')}}" alt="Selecione uma imagem para o banner">
 
-                        <div class="banner-upload">
-                          <i class="bi bi-image"></i>
-                          <span>Clique para selecionar o banner</span>
-                        </div>
+                          <div class="banner-upload">
+                            <i class="bi bi-image"></i>
+                            <span>Clique para selecionar o banner</span>
+                          </div>
 
-                      </label>
+                        </label>
                       </div>
                       
                       <div class="mb-3">
@@ -284,17 +282,6 @@
                           <option value="ATIVO">ATIVO</option>
                           <option value="INATIVO">INATIVO</option>
                         </select>
-                      </div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="new-user-welcome"
-                          checked
-                        />
-                        <label class="form-check-label" for="new-user-welcome">
-                          Send a welcome email with login details
-                        </label>
                       </div>
                     </div>
                     <div class="modal-footer">

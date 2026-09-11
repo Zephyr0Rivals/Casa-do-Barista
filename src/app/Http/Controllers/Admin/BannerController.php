@@ -21,25 +21,26 @@ class BannerController extends Controller{
     // CADASTRAR BANNER
     public function store(Request $request){
 
-       
+        
+         
 
         // 1- Validar os Dados
         $request->validate([
             'titulo_banner' => 'required|max:50',
             'imagem_banner' => 'required|image',
-            'status_imagem' => 'required'
+            'status_imagem' => 'required',
         ]);
-
-        dd($request);
+        
+        
 
         // 2- Receber a imagem enviada
         $imagem = $request->file('img-banner');
 
-        
+       
 
         // 3- Criar um nome para a imagem
         $titulo = $request->titulo_banner;
-        $nomeImg = time() . '_' . $imagem->getClienteOriginalName();
+        $nomeImg = time() . '_' . $imagem->getClientOriginalName();
         
         // 4- Salvar a imagem na pasta do projeto
         $imagem->move(public_path('barista/assets/banner'), $nomeImg);
