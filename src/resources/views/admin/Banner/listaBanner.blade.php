@@ -248,15 +248,26 @@
                     </div>
 
                     <div class="modal-body">
+
+                      @if ($errors->any())
+                        <div class="alert alert-danger">
+                          <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                            @endforeach
+                          </ul>
+                        </div>
+                      @endif
+
                       <div class="mb-3">
                         <label for="new-banner-name" class="form-label"> Nome do banner </label>
                         <input
                           type="text"
                           class="form-control"
                           id="new-banner-name"
-                          placeholder="promoção de verão"
+                          placeholder="obrigatório"
                           required
-                          name="titulo-banner"
+                          name="titulo_banner"
                         />
                       </div>
 

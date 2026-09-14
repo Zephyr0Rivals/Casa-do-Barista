@@ -27,8 +27,8 @@ class BannerController extends Controller{
         // 1- Validar os Dados
         $request->validate([
             'titulo_banner' => 'required|max:50',
-            'imagem_banner' => 'required|image',
-            'status_imagem' => 'required',
+            'img-banner' => 'required|image',
+            'status_banner' => 'required',
         ]);
         
         
