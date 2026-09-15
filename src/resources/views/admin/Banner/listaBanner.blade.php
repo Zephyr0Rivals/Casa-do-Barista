@@ -19,6 +19,23 @@
               </div>
             </div>
             <!--end::Row-->
+
+            {{-- ALERTA SUCESSO --}}
+            @if (session('sucesso'))
+              <div class="alert alert-success" role="alert">
+                <i class="bi bi-check-circle-fill"></i>
+                {{ @session('sucesso') }}
+                    
+               </div>
+            @endif
+
+            {{-- ALERTA ERRO --}}
+            @if (session('erro'))
+              <div class="alert alert-danger" role="alert">
+                <i class="bi bi-check-circle-fill"></i>
+                {{ session('erro') }}
+              </div>
+            @endif
           </div>
           <!--end::Container-->
         </div>
@@ -63,8 +80,8 @@
                             aria-label="Filter by role"
                           >
                             <option value="all" selected>Todos</option>
-                            <option value="ativo">Ativos</option>
-                            <option value="inativo">Inativos</option>
+                            <option value="ativo">ATIVOS</option>
+                            <option value="inativo">INATIVOS</option>
                             
                           </select>
                           <button
@@ -136,7 +153,7 @@
                                 </span>
                               @else
                                 <span class="badge text-bg-warning">
-                                    Inativo
+                                    INATIVO
                                 </span>
                               @endif
                             </td>
@@ -273,7 +290,7 @@
 
                       <div class="mb-3">
                         <label for="img-banner" class="form-label"> Selecione uma Imagem</label>
-                        <input type="file" class="form-control input-banner" id="img-banner" name="img-banner" accept="image/*" required>
+                        <input type="file" class="form-control input-banner" id="img-banner" name="img_banner" accept="image/*" required>
                         
                         <label for="img-banner" class="banner-upload">
                        

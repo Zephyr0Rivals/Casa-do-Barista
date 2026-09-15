@@ -45,7 +45,13 @@ Route::prefix('admin')->group(function (){
 
     // CRUD GALERIA
     Route::get('/galeria', [GaleriaController::class, 'index'])->name('admin.galeria.index'); //Lista Galeria
-
+    Route::post('/galeria', [GaleriaController::class, 'store'])->name('admin.galeria.store'); // Cadastrar Galeria
+    Route::post('/galeria/{id}/editar', [GaleriaController::class, 'edit'])->name('admin.galeria.edit');
+     //Quer que você mude tudo, senão dará erro
+    Route::put('/banner/{id}', [BannerController::class, 'update'])->name('admin.banner.update');//Atualizar Banner 
+    //Permite você mudar só um valor
+    Route::patch('/banner/{id}/status', [BannerController::class, 'status'])->name('admin.banner.status');//Ativar o Desativar Banner
+    
     // CRUD DEPOIMENTO
 
     // CRUD LINHA DO TEMPO
