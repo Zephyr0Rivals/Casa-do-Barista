@@ -1,4 +1,4 @@
- <!--begin::App Main-->
+<!--begin::App Main-->
       <main class="app-main">
         <!--begin::App Content Header-->
         <div class="app-content-header">
@@ -24,7 +24,7 @@
             @if (session('sucesso'))
               <div class="alert alert-success" role="alert">
                 <i class="bi bi-check-circle-fill"></i>
-                {{ @session('sucesso') }}
+                {{ session('sucesso') }}
                     
                </div>
             @endif
@@ -36,6 +36,8 @@
                 {{ session('erro') }}
               </div>
             @endif
+
+
           </div>
           <!--end::Container-->
         </div>
@@ -158,26 +160,39 @@
                               @endif
                             </td>
                            
-                            {{-- AÇÕES  --}}
+                            {{-- BOTÕES DE AÇÕES  --}}
 
                             <td class="text-end">
                               <div class="btn-group btn-group-sm">
+
+
+
+                                {{-- EDITAR --}}
                                 <button
                                   type="button"
                                   class="btn btn-outline-secondary"
-                                  aria-label="Editar"
-                                >
+                                  data-bs-toggle="modal" data-bs-target="#modal-edit-banner"
+                                  data-titulo="{{ $banner->titulo_banner}}"
+                                  data-status="{{ $banner->status_banner}}"
+                                  data-imagem="{{ asset('barista/assets/' . $banner->imagem_banner) }}"
+                                  data-url="{{ route('admin.banner.status', $banner->id_banner) }}"
+                                  aria-label="Editar">
+
+
                                   <i class="bi bi-pencil" aria-hidden="true"> </i>
                                 </button>
+                                
+                                {{-- ATIVAR / DESATIVAR --}}
                                 <button
-                                  type="button"
-                                  class="btn btn-outline-danger"
+                                  type="button" class="btn btn-outline-danger"
                                   data-bs-toggle="modal"
                                   data-bs-target="#modal-delete-banner"
                                   aria-label="Deletar"
                                 >
                                   <i class="bi bi-trash" aria-hidden="true"> </i>
                                 </button>
+
+
                               </div>
                             </td>
                           </tr>
@@ -189,7 +204,7 @@
                                     Nenhum banner cadastrado.
                                 </td>
                             </tr>
-                        @endforelse
+                          @endforelse
                         </tbody>
                       </table>
                     </div>
@@ -239,7 +254,7 @@
             <!--begin::Add User Modal-->
             <div
               class="modal fade"
-              id="modal-add-user"
+              id="modal-add-banner"
               tabindex="-1"
               aria-labelledby="modal-add-user-label"
               aria-hidden="true"
@@ -266,15 +281,7 @@
 
                     <div class="modal-body">
 
-                      @if ($errors->any())
-                        <div class="alert alert-danger">
-                          <ul class="mb-0">
-                            @foreach ($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                            @endforeach
-                          </ul>
-                        </div>
-                      @endif
+                      
 
                       <div class="mb-3">
                         <label for="new-banner-name" class="form-label"> Nome do banner </label>
@@ -291,7 +298,9 @@
                       <div class="mb-3">
                         <label for="img-banner" class="form-label"> Selecione uma Imagem</label>
                         <input type="file" class="form-control input-banner" id="img-banner" name="img_banner" accept="image/*" required>
-                        
+                      </div>
+                      
+                      
                         <label for="img-banner" class="banner-upload">
                        
                           <img id="ver-banner" src="{{ asset('admin/assets/img/sem-banner.svg')}}" alt="Selecione uma imagem para o banner">
@@ -302,8 +311,7 @@
                           </div>
 
                         </label>
-                      </div>
-                      
+                     
                       <div class="mb-3">
                         <label for="new-banner-role" class="form-label"> Status </label>
                         <select id="new-banner-role" class="form-select" name="status_banner">
@@ -320,6 +328,22 @@
                     </div>
                   </form>
                 </div>
+              </div>
+            </div>
+            <!--end::Add User Modal-->
+
+            <!--begin::Add User Modal-->
+            <div
+              class="modal fade"
+              id="modal-edit-banner"
+              tabindex="-1"
+              aria-labelledby="modal-add-user-label"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                
               </div>
             </div>
             <!--end::Add User Modal-->
@@ -367,7 +391,89 @@
         <!--end::App Content-->
       </main>
       <!--end::App Main-->
-    
+
+
+
+      {{-- INICIO - MODAL EDITAR BANNER  --}}
+              <div
+              class="modal fade"
+              id="modal-edit-banner"
+              tabindex="-1"
+              aria-labelledby="modal-add-banner-label"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                {{-- FORMA DE EDITAR  --}}
+                  <form
+                    method="POST"
+                    enctype="multipart/form-data">
+                    @csrf {{-- gera token aleatório --}}
+                    @method('PUT')
+
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modal-add-banner-label">Editar novo banner</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                      <div class="mb-3">
+                        <label for="edit-banner-titulo" class="form-label"> Titulo Banner </label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="edit-banner-titulo"
+                          required
+                          name="titulo_banner"
+                        />
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="img-banner" class="form-label"> Selecione uma Imagem</label>
+                        <input type="file" class="form-control input-banner" id="img-banner" name="img_banner" accept="image/*" required>
+                      </div>
+                      
+                      
+                        <label for="img-banner" class="banner-upload">
+                       
+                          <img id="ver-banner" src="{{ asset('admin/assets/img/sem-banner.svg')}}" alt="Selecione uma imagem para o banner">
+
+                          <div class="banner-upload">
+                            <i class="bi bi-image"></i>
+                            <span>Clique para selecionar o banner</span>
+                          </div>
+
+                        </label>
+                     
+                      <div class="mb-3">
+                        <label for="new-banner-role" class="form-label"> Status </label>
+                        <select id="new-banner-role" class="form-select" name="status_banner">
+                          <option value="ATIVO">ATIVO</option>
+                          <option value="INATIVO">INATIVO</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancel
+                      </button>
+                      <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+      
+
+
+
+{{-- Carregando a foto do modal cadastrar --}}
 <script>
     const inputBanner = document.getElementById('img-banner');
     const previewBanner = document.getElementById('ver-banner');
@@ -384,3 +490,54 @@
  
     });
 </script>
+
+{{-- do edit --}}
+<script>
+  const modalEditarBanner   = document.getElementById('modal-edit-banner');
+  const formEditBanner      = document.getElementById('form-edit-banner');
+  const editId              = document.getElementById('edit-id-banner');
+  const editTitulo          = document.getElementById('edit-banner-titulo');
+  const editStatus          = document.getElementById('edit-banner-status'); 
+  const editImagem          = document.getElementById('edit-banner-imagem');
+  const editMostrar         = document.getElementById('edit-banner-mostrar');
+
+  // Carregar as informações no Modal
+  modalEditarBanner.addEventListener('show.bs.modal', function(){
+
+    const botao = event.relatedTarget;
+
+    const id = botao.getAttribute('data-id');
+    const titulo = botao.getAttribute('data-titulo');
+    const status = botao.getAttribute('data-status');
+    const image = botao.getAttribute('data-image');
+    const url = botao.getAttribute('data-url');
+
+    // Form Action
+    formEditBanner.action = url;
+    
+
+    // Preencher
+    editTitulo.value    = titulo;
+    editStatus.value    = status;
+    editImagem.src      = image;
+
+    editImagem.value = '';
+
+  });
+
+  // VER FOTO PARA EDITAR 
+  editImagem.addEventListener('change', function(){
+    
+    const arquivo = this.files[0];
+    
+    if (arquivo){
+
+      editMostrar.src = URL.createObjectURL(arquivo);
+
+    }
+
+
+  });
+
+</script>
+

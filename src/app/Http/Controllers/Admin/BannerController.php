@@ -20,7 +20,7 @@ class BannerController extends Controller{
     
     }
 
-    // CADASTRAR BANNER
+    // CADASTRAR BANNER: C
     public function store(Request $request){
 
 
@@ -106,5 +106,137 @@ class BannerController extends Controller{
         }       
    
     }
+
+    // ATUALIZAR BANNER: U
+    public function update(Request $request, int $id){
+        
+        
+        // 1- Validar os Dados
+        $dados = $request->validate([
+            'titulo_banner' => 'required|max:50',
+            'img_banner' => 'required|image|mimes:jpg,png,webp,jpeg|max:4096',
+            'status_banner' => 'required|in:ATIVO,INATIVO',
+        ]);
+   
+        // 2 - BUSCAR O BANNER (o id)
+        $banner = Banner::findOrFall($id);
+
+         try{
+                // Descobrindo o titulo atual
+                $tituloSlug = Str::slug($dados['titulo_banner']);
+                
+                // Guardo nome da pasta
+                $pasta = public_path('barista/assets/banner');
+
+                // Guardo caminho salvo no banco
+                $caminhoArquivo = $banner->imagem_banner; 
+
+                // Guardo Caminho físico da imagem atual
+                $imgAntiga = public_path('barista/assets' , $banner->imagem_banner);
+
+                // CASO 1: NOVA IMAGEM
+                if($request->hasFile('imagem_banner')){
+
+                    $imagem = $request->file('imagem_banner');
+
+                    // Guarda a extensão da imagem
+                    $extensao = $strtolower($imagem->getClientOriginalExtension());
+
+                    // Reconstroi o nome com o novo titulo 
+                    $nomeImg = $tituloImg . '_' . $banner->id_banner . '.' . $extensao; 
+
+                    // Excluir a imagem anterior
+
+                    if(file_exists($imgAntiga)){
+                        unlink($imgAntiga);
+                    }
+
+                    // Salve a nova imagem
+                    $imagem->move($pasta, $nomeImg);
+
+                    $caminhoArquivo = 'banner/' . $nomeImg;
+
+                }elseif($banner->titulo_banner !== $request->titulo_banner){
+                    //CASO 2 - MUDOU SOMENTE O NOME
+
+                     $extensao = pathinfo($banner->titulo_banner, PATHINFO_EXTENSION);  
+                     
+                     $nomeImg= $tituloSlug . '_' . $banner->id_banner . '.' . $extensao;
+
+                     $novaImagem = public_path('barista/assets/banner' . $nomeImg);
+
+                     if(file_exists($imgAntiga)){
+
+                        rename(
+                            $imgAntiga,
+                            $novaImagem
+                        );
+
+                        $caminhoArquivo = 'banner/' . $nomeImg;
+
+                     }
+
+                }
+
+                //ATUALIZA NO BANCO
+                $banner->update([
+                    'titulo_banner' => $dados['titulo_banner'],
+                    'imagem_banner' => $caminhoArquivo,
+                    'status_banner' => $dados['status_banner'],
+
+                ]);
+
+                // Voltar para a Listagem
+                return redirect()
+                ->route('admin.banner.index')
+                ->with('sucesso','Banner: ' . $banner->titulo_banner . 'foi atualizado com sucesso!');
+
+        } catch (\Throwable $error) {
+         
+            report($error);
+
+            return redirect()
+                ->back()
+                ->with('erro', 'Não foi possível atualizar o banner. Tente mais tarde!');
+            
+        }  
+
+
+    } // FIM DO METODO UPDATE 
+
+
+    // ATIVAR E DESATIVAR O BANNER: D (U)
+
+    public function status(Request $request, int $id){
+        try {
+            
+            $banner = Banner::findOrFall($id);
+
+            // If ternário ? = verdadeiro; ! = Falso.
+            $novoStatus = $banner->status_banner === 'ATIVO' ? 'INATIVO' : 'ATIVO';
+
+            // ATUALIZAR NO BANCO
+            $banner->update([
+                'status_banner' => $novoStatus,
+            ]);
+
+            $mensagem = $novoStatus === 'ATIVO' ? 'Banner ativado com sucesso' : 'Banner desativado com sucesso';
+
+             // Voltar para a Listagem
+                return redirect()
+                ->route('admin.banner.index')
+                ->with('sucesso', $mensagem);
+
+
+        }catch (\Throwable $error){
+
+         report($error);
+
+            return redirect()
+                ->back()
+                ->with('erro', 'Não foi possível alterar o status do banner. Tente mais tarde!');
+        }
+
+    } // FINAL DE ATIVA E DESATIVAR
 
 } 
