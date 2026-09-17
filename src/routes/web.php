@@ -45,7 +45,11 @@ Route::prefix('admin')->group(function (){
     Route::put('/banner/{id}', [BannerController::class, 'update'])->name('admin.banner.update');//Atualizar Banner 
     
     //Permite você mudar só um valor
-    Route::patch('/banner/{id}/status', [BannerController::class, 'status'])->name('admin.banner.status');//Ativar o Desativar Banner
+    // Route::patch('/banner/{id}/status', [BannerController::class, 'status'])->name('admin.banner.status');//Ativar o Desativar Banner
+     Route::patch('/banner/{id}', [BannerController::class, 'status'])->name('admin.banner.status');
+
+
+
 
     // CRUD GALERIA
     Route::get('/galeria', [GaleriaController::class, 'index'])->name('admin.galeria.index'); //Lista Galeria

@@ -82,15 +82,15 @@
                             aria-label="Filter by role"
                           >
                             <option value="all" selected>Todos</option>
-                            <option value="ativo">ATIVOS</option>
-                            <option value="inativo">INATIVOS</option>
+                            <option value="ATIVSO">Ativos</option>
+                            <option value="INATIVOS">Inativos</option>
                             
                           </select>
                           <button
                             type="button"
                             class="btn btn-sm btn-primary"
                             data-bs-toggle="modal"
-                            data-bs-target="#modal-add-user"
+                            data-bs-target="#modal-add-banner"
                           >
                             <i class="bi bi-person-plus-fill me-1" aria-hidden="true"> </i>
                             Novo Banner
@@ -141,7 +141,7 @@
                             </td>
                             {{-- TITULO --}}
                             <td>
-                              <span class="badge text-bg-success">
+                              <span class="badge text-table">
                                 {{ $banner->titulo_banner }}
                               </span>
                             </td>
@@ -151,11 +151,11 @@
                             <td>
                               @if($banner->status_banner === 'ATIVO')
                                 <span class="badge text-bg-success">
-                                    ATIVO
+                                    Ativo
                                 </span>
                               @else
-                                <span class="badge text-bg-warning">
-                                    INATIVO
+                                <span class="badge text-bg-danger">
+                                    Inativo
                                 </span>
                               @endif
                             </td>
@@ -172,26 +172,57 @@
                                   type="button"
                                   class="btn btn-outline-secondary"
                                   data-bs-toggle="modal" data-bs-target="#modal-edit-banner"
+                                  data-id="{{ $banner->id_banner }}"
                                   data-titulo="{{ $banner->titulo_banner}}"
                                   data-status="{{ $banner->status_banner}}"
-                                  data-imagem="{{ asset('barista/assets/' . $banner->imagem_banner) }}"
-                                  data-url="{{ route('admin.banner.status', $banner->id_banner) }}"
+                                  data-image="{{ asset('barista/assets/' . $banner->imagem_banner) }}"
+                                  data-url="{{ route('admin.banner.update', $banner->id_banner) }}"
                                   aria-label="Editar">
-
 
                                   <i class="bi bi-pencil" aria-hidden="true"> </i>
                                 </button>
                                 
-                                {{-- ATIVAR / DESATIVAR --}}
-                                <button
-                                  type="button" class="btn btn-outline-danger"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#modal-delete-banner"
-                                  aria-label="Deletar"
-                                >
-                                  <i class="bi bi-trash" aria-hidden="true"> </i>
-                                </button>
+                                {{-- INICIO ATIVAR / DESATIVAR --}}
+                                
+                                <form action="{{ route('admin.banner.status', $banner->id_banner) }}"
+                                method="POST" class="d-inline">
+                                  @csrf
+                                  @method('PATCH')
 
+                                  @if($banner->status_banner === 'ATIVO')
+                                    <button
+                                      type="submit" class="btn btn-outline-danger"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#modal-status-banner"
+                                      title="Desativar banner"
+                                      data-url="{{ route('admin.banner.status', $banner->id_banner) }}"
+                                      data-titulo="{{ $banner->titulo_banner }}"
+                                      data-status="ATIVO"
+                                      aria-label="Deletar">
+
+                                      <i class="bi bi-eye-fill" aria-hidden="true"> </i>
+                                    </button>
+                                  @else
+                                      <button
+                                        type="submit" class="btn btn-outline-success"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal-status-banner"
+                                        title="Desativar banner"
+                                        data-url="{{ route('admin.banner.status', $banner->id_banner) }}"
+                                        data-titulo="{{ $banner->titulo_banner }}"
+                                        data-status="INATIVO"
+                                        aria-label="Deletar">
+
+
+
+                                        <i class="bi bi-eye-slash-fill" aria-hidden="true"> </i>
+                                      </button>
+                                    
+                                  @endif
+                                  
+                                </form>
+
+                                {{-- FIM ATIVAR / DESATIVAR --}}
 
                               </div>
                             </td>
@@ -219,6 +250,8 @@
                         {{ $listaBanner->count()}}
                      </strong>
                     </div>
+
+                    {{-- Lista de páginas --}}
                     <ul class="pagination pagination-sm m-0 float-end">
                       <li class="page-item disabled">
                         <a class="page-link" href="#" aria-label="Previous"> &laquo; </a>
@@ -242,6 +275,7 @@
                         <a class="page-link" href="#" aria-label="Next"> &raquo; </a>
                       </li>
                     </ul>
+
                   </div>
                   <!--end::Card Footer-->
                 </div>
@@ -251,18 +285,20 @@
             </div>
             <!--end::Row-->
 
-            <!--begin::Add User Modal-->
+            {{-- FORMA DE CADASTRO  --}}
+            
+            <!--begin::Add Banner Modal-->
             <div
               class="modal fade"
               id="modal-add-banner"
               tabindex="-1"
-              aria-labelledby="modal-add-user-label"
+              aria-labelledby="modal-add-banner-label"
               aria-hidden="true"
             >
               <div class="modal-dialog">
                 <div class="modal-content">
 
-                {{-- FORMA DE CADASTRO  --}}
+                
                   <form
                     action="{{ route('admin.banner.store') }}"
                     method="POST"
@@ -270,7 +306,7 @@
                     @csrf {{-- gera token aleatório --}}
 
                     <div class="modal-header">
-                      <h5 class="modal-title" id="modal-add-banner-label">Colocar um banner novo</h5>
+                      <h5 class="modal-title" id="modal-add-banner-label">Cadastrar banner novo</h5>
                       <button
                         type="button"
                         class="btn-close"
@@ -322,91 +358,29 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Cancel
+                        Cancelar
                       </button>
                       <button type="submit" class="btn btn-primary">Salvar</button>
                     </div>
                   </form>
+                  {{-- FIM DO FORM CADASTRO --}}
                 </div>
               </div>
             </div>
-            <!--end::Add User Modal-->
+            <!--end::Add Banner Modal-->
 
-            <!--begin::Add User Modal-->
+            {{-- INICIO - FORMA DE EDITAR  --}}
             <div
-              class="modal fade"
-              id="modal-edit-banner"
-              tabindex="-1"
-              aria-labelledby="modal-add-user-label"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-
-                
-              </div>
-            </div>
-            <!--end::Add User Modal-->
-
-            <!--begin::Delete User Modal-->
-            <div
-              class="modal fade"
-              id="modal-delete-banner"
-              tabindex="-1"
-              aria-labelledby="modal-delete-user-label"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="modal-delete-user-label">Deletar Banner</h5>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
-                  </div>
-                  <div class="modal-body">
-                    <p class="mb-0">
-                     Você tem certeza de que quer deletar este Banner? All content owned by the account
-                      will be reassigned to the site administrator. This action cannot be undone.
-                    </p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                      Cancel
-                    </button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                      Delete Banner
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--end::Delete User Modal-->
-          </div>
-          <!--end::Container-->
-        </div>
-        <!--end::App Content-->
-      </main>
-      <!--end::App Main-->
-
-
-
-      {{-- INICIO - MODAL EDITAR BANNER  --}}
-              <div
               class="modal fade"
               id="modal-edit-banner"
               tabindex="-1"
               aria-labelledby="modal-add-banner-label"
-              aria-hidden="true"
-            >
+              aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
-
-                {{-- FORMA DE EDITAR  --}}
+                
                   <form
+                    id="form-edit-banner"
                     method="POST"
                     enctype="multipart/form-data">
                     @csrf {{-- gera token aleatório --}}
@@ -436,44 +410,117 @@
                       </div>
 
                       <div class="mb-3">
-                        <label for="img-banner" class="form-label"> Selecione uma Imagem</label>
-                        <input type="file" class="form-control input-banner" id="img-banner" name="img_banner" accept="image/*" required>
+                        <label for="edit-banner-titulo" class="form-label"> Título Banner</label>
+                        <input type="file" class="form-control" id="edit-banner-titulo" required name="titulo_banner" />
                       </div>
                       
                       
+                        <label for="edit-banner-imagem" class="form-label"> Selecione uma imagem </label>
+
+                        <input type="file" class="form-control input-banner" 
+                          id="edit-banner-imagem" name="imagem-banner" accept="image/*" required>
+
                         <label for="img-banner" class="banner-upload">
-                       
-                          <img id="ver-banner" src="{{ asset('admin/assets/img/sem-banner.svg')}}" alt="Selecione uma imagem para o banner">
+
+                          <img id="edit-banner-mostrar" src="" alt="banner">
 
                           <div class="banner-upload">
                             <i class="bi bi-image"></i>
-                            <span>Clique para selecionar o banner</span>
+                            <span>Deixe o vazio para manter a imagem atual</span>
                           </div>
 
                         </label>
+
+                        
                      
                       <div class="mb-3">
-                        <label for="new-banner-role" class="form-label"> Status </label>
-                        <select id="new-banner-role" class="form-select" name="status_banner">
-                          <option value="ATIVO">ATIVO</option>
-                          <option value="INATIVO">INATIVO</option>
+                        <label for="edit-banner-status" class="form-label"> Status </label>
+                        <select id="edit-banner-status" class="form-select" name="status_banner">
+                          <option value="ATIVO">Ativo</option>
+                          <option value="INATIVO">Inativo</option>
                         </select>
                       </div>
                     </div>
+
+
+
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Cancel
+                        Cancelar
                       </button>
-                      <button type="submit" class="btn btn-primary">Salvar</button>
+                      <button type="submit" class="btn btn-primary">Atualizar banner</button>
                     </div>
+
+
+                  </form>
+
+                </div>
+              </div>
+            
+            </div>
+            {{-- FIM - MODAL EDIT BANNER  --}}
+            
+            {{-- INICIO - MODAL ATIVAR/DESATIVAR BANNER --}}
+            <div
+              class="modal fade"
+              id="modal-status-banner"
+              tabindex="-1"
+              aria-labelledby="modal-status-banner-label"
+              aria-hidden="true">
+
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  
+                  <form id="form-status-banner" method="POST">
+                    @csrf
+                    @method('PATCH')
+
+                    <div class="modal-header">
+
+                      <h5 class="modal-title" id="modal-status-banner-titulo">Deletar banner</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    </div>
+                    
+                    <div class="modal-body">
+
+                      <p class="mb-0" id="modal-status-banner-txt">
+                        Tem certeza de que deseja alterar o status do banner?
+
+                      </p>
+
+                    </div>
+
+                    <div class="modal-footer">
+        
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                      </button>
+
+                      <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" id="btn-status-banner">
+                        Confirmar
+                      </button>
+
+                    </div>
+
                   </form>
                 </div>
               </div>
-      
+            </div>
+            {{-- FIM - MODAL ATIVAR/DESATIVAR BANNER --}}
+           
+          </div>
+          <!--end::Container-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
 
 
-
-{{-- Carregando a foto do modal cadastrar --}}
+{{-- CARREGANDO A FOTO DO MODEL CADASTRAR --}}
 <script>
     const inputBanner = document.getElementById('img-banner');
     const previewBanner = document.getElementById('ver-banner');
@@ -491,15 +538,15 @@
     });
 </script>
 
-{{-- do edit --}}
+{{-- EDITAR BANNER --}}
 <script>
-  const modalEditarBanner   = document.getElementById('modal-edit-banner');
-  const formEditBanner      = document.getElementById('form-edit-banner');
-  const editId              = document.getElementById('edit-id-banner');
-  const editTitulo          = document.getElementById('edit-banner-titulo');
-  const editStatus          = document.getElementById('edit-banner-status'); 
-  const editImagem          = document.getElementById('edit-banner-imagem');
-  const editMostrar         = document.getElementById('edit-banner-mostrar');
+  const modalEditarBanner = document.getElementById('modal-edit-banner');
+  const formEditBanner = document.getElementById('form-edit-banner');
+  const editId = document.getElementById('edit-id-banner');
+  const editTitulo = document.getElementById('edit-banner-titulo');
+  const editStatus = document.getElementById('edit-banner-status'); 
+  const editImagem = document.getElementById('edit-banner-imagem');
+  const editMostrar = document.getElementById('edit-banner-mostrar');
 
   // Carregar as informações no Modal
   modalEditarBanner.addEventListener('show.bs.modal', function(){
@@ -526,11 +573,11 @@
   });
 
   // VER FOTO PARA EDITAR 
-  editImagem.addEventListener('change', function(){
+  editImagem.addEventListener('change', function() {
     
     const arquivo = this.files[0];
     
-    if (arquivo){
+    if (arquivo) {
 
       editMostrar.src = URL.createObjectURL(arquivo);
 
@@ -541,3 +588,63 @@
 
 </script>
 
+{{-- ATIVAR E DESATIVAR BANNER --}}
+<script>
+
+  const modalStatusBanner = document.getElementById('modal-status-banner');
+  const formStatusBanner = document.getElementById('form-status-banner');
+  const tituloStatusBanner = document.getElementById('modal-status-banner-titulo');
+  const txtStatusBanner = document.getElementById('modal-status-banner-txt');
+  const btnStatusBanner = document.getElementById('btn-status-banner');
+
+  modalStatusBanner.addEventListener('show.bs.modal', function(event){
+
+    const botao = event.relatedTarget;
+    
+    const url = botao.getAttribute('data-url');
+    const titulo = botao.getAttribute('data-titulo');
+    const status = botao.getAttribute('data-status');
+
+    formStatusBanner.action = url;
+
+    if(status === 'ATIVO'){
+
+      tituloStatusBanner.textContent = 'Desativar Status Banner';
+      txtStatusBanner.textContent = 'Tem certeza de que deseja desativar o status do banner?';
+      btnStatusBanner.textContent = 'Desativar';
+
+      btnStatusBanner.className = 'btn btn-danger'
+
+    }else{
+
+      tituloStatusBanner.textContent = 'Ativar Status Banner';
+      txtStatusBanner.textContent = 'Tem certeza de que deseja Ativar o status do banner?';
+      btnStatusBanner.textContent = 'Ativar';
+
+      btnStatusBanner.className = 'btn btn-success'
+
+    }
+                                  
+
+  });
+
+
+</script>
+
+{{-- TIME PARA O ALERTA --}}
+<script>
+
+  setTimeout(() => {
+
+    const alertas = document.querySelectorAll('.alert');
+
+    alertas.forEach(function(alerta)
+      
+      const instancia = bootsrap.Alert.getCreateInstance(alertas)
+      
+      instancia.close();
+      
+    });
+
+  }, 5000s);
+</script>

@@ -28,8 +28,11 @@ class BannerController extends Controller{
         $dados = $request->validate([
             'titulo_banner' => 'required|max:50',
             'img_banner' => 'required|image|mimes:jpg,png,webp,jpeg|max:4096',
-            'status_banner' => 'required|in:ATIVO,INATIVO',
+            'status_banner' => 'required|in:ATIVO,INATIVO'
         ]);
+
+       
+        $caminhoArquivo = null;
 
         try{
 
@@ -47,8 +50,6 @@ class BannerController extends Controller{
                 // 3- Receber a imagem enviada
                 $imagem = $request->file('img_banner');
 
-            
-
                 // 4 - Criar um nome para a imagem
                 // Café Mineiro mudar para: cafe_mineiro_7.png
                 $tituloImg = Str::slug($dados['titulo_banner']);
@@ -64,14 +65,14 @@ class BannerController extends Controller{
                 $pasta = public_path('barista/assets/banner');
 
                 // 8 - Se a pasta não existir... crie/faça:
-                if(!is_dir($pasta)){    
+                if(!is_dir($pasta)) {    
                     mkdir($pasta, 0775, true);
                 }
 
                 // 9 - Mover e salvar a img na pasta
                 $imagem->move(
                     $pasta,
-                    $nomeImg,
+                    $nomeImg
 
                 );
 
@@ -92,7 +93,7 @@ class BannerController extends Controller{
          
             DB::rollback();
 
-            if($caminhoArquivo && file_exists($caminhoArquivo)){
+            if ($caminhoArquivo && file_exists($caminhoArquivo)) {
                 unlink($caminhoArquivo);
             }
 
@@ -114,12 +115,12 @@ class BannerController extends Controller{
         // 1- Validar os Dados
         $dados = $request->validate([
             'titulo_banner' => 'required|max:50',
-            'img_banner' => 'required|image|mimes:jpg,png,webp,jpeg|max:4096',
-            'status_banner' => 'required|in:ATIVO,INATIVO',
+            'img_banner' => 'nullable|image|mimes:jpg,png,webp,jpeg|max:4096',
+            'status_banner' => 'required|in:ATIVO,INATIVO'
         ]);
    
         // 2 - BUSCAR O BANNER (o id)
-        $banner = Banner::findOrFall($id);
+        $banner = Banner::findOrFail($id);
 
          try{
                 // Descobrindo o titulo atual
@@ -132,18 +133,18 @@ class BannerController extends Controller{
                 $caminhoArquivo = $banner->imagem_banner; 
 
                 // Guardo Caminho físico da imagem atual
-                $imgAntiga = public_path('barista/assets' , $banner->imagem_banner);
+                $imgAntiga = public_path('barista/assets' . $banner->imagem_banner);
 
                 // CASO 1: NOVA IMAGEM
-                if($request->hasFile('imagem_banner')){
+                if($request->hasFile('imagem_banner'))  {
 
                     $imagem = $request->file('imagem_banner');
 
                     // Guarda a extensão da imagem
-                    $extensao = $strtolower($imagem->getClientOriginalExtension());
+                    $extensao = strtolower($imagem->getClientOriginalExtension());
 
                     // Reconstroi o nome com o novo titulo 
-                    $nomeImg = $tituloImg . '_' . $banner->id_banner . '.' . $extensao; 
+                    $nomeImg = $tituloSlug . '_' . $banner->id_banner . '.' . $extensao; 
 
                     // Excluir a imagem anterior
 
@@ -156,14 +157,14 @@ class BannerController extends Controller{
 
                     $caminhoArquivo = 'banner/' . $nomeImg;
 
-                }elseif($banner->titulo_banner !== $request->titulo_banner){
+                } elseif ($banner->titulo_banner !== $request->titulo_banner){
                     //CASO 2 - MUDOU SOMENTE O NOME
 
-                     $extensao = pathinfo($banner->titulo_banner, PATHINFO_EXTENSION);  
+                     $extensao = pathinfo($banner->imagem_banner, PATHINFO_EXTENSION);  
                      
                      $nomeImg= $tituloSlug . '_' . $banner->id_banner . '.' . $extensao;
 
-                     $novaImagem = public_path('barista/assets/banner' . $nomeImg);
+                     $novaImagem = public_path('barista/assets/banner/' . $nomeImg);
 
                      if(file_exists($imgAntiga)){
 
@@ -208,11 +209,13 @@ class BannerController extends Controller{
     // ATIVAR E DESATIVAR O BANNER: D (U)
 
     public function status(Request $request, int $id){
+
+
         try {
             
-            $banner = Banner::findOrFall($id);
+            $banner = Banner::findOrFail($id);
 
-            // If ternário ? = verdadeiro; ! = Falso.
+            // If ternário (? = verdadeiro; ! = Falso.)
             $novoStatus = $banner->status_banner === 'ATIVO' ? 'INATIVO' : 'ATIVO';
 
             // ATUALIZAR NO BANCO
@@ -228,7 +231,7 @@ class BannerController extends Controller{
                 ->with('sucesso', $mensagem);
 
 
-        }catch (\Throwable $error){
+        } catch (\Throwable $error){
 
          report($error);
 
