@@ -35,19 +35,19 @@ Route::prefix('admin')->group(function (){
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     // CRUD BANNER
-    Route::get('/banner', [BannerController::class, 'index'])->name('admin.banner.index'); //Lista Banner
+        Route::get('/banner', [BannerController::class, 'index'])->name('admin.banner.index'); //Lista Banner
+        
+        Route::post('/banner', [BannerController::class, 'store'])->name('admin.banner.store');// Cadastrar Banner
     
-    Route::post('/banner', [BannerController::class, 'store'])->name('admin.banner.store');// Cadastrar Banner
-   
-    //Route::get('/banner/{id}/editar', [BannerController::class, 'edit'])->name('admin.banner.edit');//Abrir o form de Editar banner, só se abrisse em outra página
+        //Route::get('/banner/{id}/editar', [BannerController::class, 'edit'])->name('admin.banner.edit');//Abrir o form de Editar banner, só se abrisse em outra página
+        
+        //Quer que você mude tudo, senão dará erro
+        Route::put('/banner/{id}', [BannerController::class, 'update'])->name('admin.banner.update');//Atualizar Banner 
+        
+        //Permite você mudar só um valor
+        Route::patch('/banner/{id}', [BannerController::class, 'status'])->name('admin.banner.status');
     
-    //Quer que você mude tudo, senão dará erro
-    Route::put('/banner/{id}', [BannerController::class, 'update'])->name('admin.banner.update');//Atualizar Banner 
-    
-    //Permite você mudar só um valor
-    // Route::patch('/banner/{id}/status', [BannerController::class, 'status'])->name('admin.banner.status');//Ativar o Desativar Banner
-     Route::patch('/banner/{id}', [BannerController::class, 'status'])->name('admin.banner.status');
-
+        // FINAL CRUD BANNER
 
 
 
@@ -69,6 +69,13 @@ Route::prefix('admin')->group(function (){
     // CRUD CLIENTE
 
     // CRUD CATEGORIA
+        Route::get('/admin/produtos/categoria', [CategoriaController::class, 'index'])->name('admin.produtos.categoria.index'); // Listar Categoria
+        Route::post('/admin/produtos/categoria', [CategoriaController::class, 'store'])->name('admin.produtos.categoria.store'); //Cadastra o Banner
+        Route::put('/admin/produtos/categoria/{id}', [CategoriaController::class, 'update'])->name('admin.produtos.categoria.update'); //Atualiza o Banner
+        
+        Route::patch('/admin/produtos/categoria/{îd}', [CategoriaController::class, 'status'])->name('admin.produtos.categoria.status'); //Ativar e Desativar Banner
+    
+    // FINAL CRUD CATEGORIA
 });
 
 
@@ -78,4 +85,3 @@ Route::get('/admin/linhatempo', [LinhaTempoController::class, 'index'])->name('a
 Route::get('/admin/newsletter', [NewsletterController::class, 'index'])->name('admin.newsletter.index');
 Route::get('/admin/vendas/cliente', [ClienteController::class, 'index'])->name('admin.vendas.cliente.index');
 // Route::get('/admin/vendas/venda', [VendaController::class, 'index'])->name('admin.vendas.venda.index');
-Route::get('/admin/produtos/categoria', [CategoriaController::class, 'index'])->name('admin.produtos.categoria.index');

@@ -7,7 +7,7 @@
             <!--begin::Row-->
             <div class="row">
               <div class="col-sm-6">
-                <h1 class="mb-0 fs-3">BANNERS</h1>
+                <h1 class="mb-0 fs-3">Banners</h1>
               </div>
               <div class="col-sm-6">
                 <nav aria-label="breadcrumb">
@@ -82,7 +82,7 @@
                             aria-label="Filter by role"
                           >
                             <option value="all" selected>Todos</option>
-                            <option value="ATIVSO">Ativos</option>
+                            <option value="ATIVOS">Ativos</option>
                             <option value="INATIVOS">Inativos</option>
                             
                           </select>
@@ -392,37 +392,39 @@
                         type="button"
                         class="btn-close"
                         data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
+                        aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
 
                       <div class="mb-3">
-                        <label for="edit-banner-titulo" class="form-label"> Titulo Banner </label>
+                        <label for="edit-banner-titulo" class="form-label"> Titulo banner </label>
                         <input
                           type="text"
                           class="form-control"
                           id="edit-banner-titulo"
                           required
-                          name="titulo_banner"
-                        />
+                          name="titulo_banner"/>
                       </div>
 
-                      <div class="mb-3">
-                        <label for="edit-banner-titulo" class="form-label"> Título Banner</label>
-                        <input type="file" class="form-control" id="edit-banner-titulo" required name="titulo_banner" />
-                      </div>
+                     <div class="mb-3">
+                        <label for="edit-banner-titulo" class="form-label"> Titulo banner</label>
+
+                        <input type="text" class="form-control" id="edit-banner-titulo" required name="titulo_banner" />
                       
+                      </div> 
+                      
+                      
+                      <div class="mb-3">
                       
                         <label for="edit-banner-imagem" class="form-label"> Selecione uma imagem </label>
 
                         <input type="file" class="form-control input-banner" 
-                          id="edit-banner-imagem" name="imagem-banner" accept="image/*" required>
+                          id="edit-banner-imagem" name="img_banner" accept="image/*" required>
 
-                        <label for="img-banner" class="banner-upload">
+                        <label for="edit-banner-imagem" class="banner-upload">
 
-                          <img id="edit-banner-mostrar" src="" alt="banner">
+                          <img id="edit-banner-mostrar" src="{{ asset('admin/assets/img/sem-banner.svg')}}" alt="banner">
 
                           <div class="banner-upload">
                             <i class="bi bi-image"></i>
@@ -431,7 +433,7 @@
 
                         </label>
 
-                        
+                      </div>  
                      
                       <div class="mb-3">
                         <label for="edit-banner-status" class="form-label"> Status </label>
@@ -549,7 +551,7 @@
   const editMostrar = document.getElementById('edit-banner-mostrar');
 
   // Carregar as informações no Modal
-  modalEditarBanner.addEventListener('show.bs.modal', function(){
+  modalEditarBanner.addEventListener('show.bs.modal', function(event){
 
     const botao = event.relatedTarget;
 
@@ -567,6 +569,7 @@
     editTitulo.value    = titulo;
     editStatus.value    = status;
     editImagem.src      = image;
+
 
     editImagem.value = '';
 
@@ -638,13 +641,16 @@
 
     const alertas = document.querySelectorAll('.alert');
 
-    alertas.forEach(function(alerta)
+    alertas.forEach(function(alerta){
       
-      const instancia = bootsrap.Alert.getCreateInstance(alertas)
+      const instancia = bootstrap.Alert.getOrCreateInstance(alerta);
       
       instancia.close();
       
     });
 
-  }, 5000s);
+  }, 5000);
+
+
+
 </script>

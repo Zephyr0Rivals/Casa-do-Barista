@@ -31,8 +31,10 @@ class BannerController extends Controller{
             'status_banner' => 'required|in:ATIVO,INATIVO'
         ]);
 
-       
+
         $caminhoArquivo = null;
+
+        
 
         try{
 
@@ -87,7 +89,7 @@ class BannerController extends Controller{
                 // 11 - Montar e enviar uma mensagem
                 return redirect()
                 ->route('admin.banner.index')
-                ->with('sucesso','Banner: ' . $banner->titulo_banner . 'foi cadastrado com sucesso!');
+                ->with('sucesso','Banner: ' . $banner->titulo_banner . ' foi cadastrado com sucesso!');
 
         } catch (\Throwable $error) {
          
@@ -136,9 +138,9 @@ class BannerController extends Controller{
                 $imgAntiga = public_path('barista/assets' . $banner->imagem_banner);
 
                 // CASO 1: NOVA IMAGEM
-                if($request->hasFile('imagem_banner'))  {
+                if($request->hasFile('img_banner'))  {
 
-                    $imagem = $request->file('imagem_banner');
+                    $imagem = $request->file('img_banner');
 
                     // Guarda a extensão da imagem
                     $extensao = strtolower($imagem->getClientOriginalExtension());
@@ -190,7 +192,7 @@ class BannerController extends Controller{
                 // Voltar para a Listagem
                 return redirect()
                 ->route('admin.banner.index')
-                ->with('sucesso','Banner: ' . $banner->titulo_banner . 'foi atualizado com sucesso!');
+                ->with('sucesso','Banner: ' . $banner->titulo_banner . ' foi atualizado com sucesso!');
 
         } catch (\Throwable $error) {
          

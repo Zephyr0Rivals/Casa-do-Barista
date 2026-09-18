@@ -23,6 +23,22 @@
           <!--end::Container-->
         </div>
         <!--end::App Content Header-->
+          {{-- ALERTA SUCESSO --}}
+            @if (session('sucesso'))
+              <div class="alert alert-success" role="alert">
+                <i class="bi bi-check-circle-fill"></i>
+                {{ session('sucesso') }}
+                    
+               </div>
+            @endif
+
+            {{-- ALERTA ERRO --}}
+            @if (session('erro'))
+              <div class="alert alert-danger" role="alert">
+                <i class="bi bi-check-circle-fill"></i>
+                {{ session('erro') }}
+              </div>
+            @endif
 
 
 
@@ -50,10 +66,10 @@
                             </span>
                             <input
                               type="search"
-                              id="nome_categoria"
+                              id="categoria-search"
                               class="form-control"
-                              placeholder="Pesquisar Categoria"
-                              aria-label="Pesquisar Categoria"
+                              placeholder="Pesquisar categoria"
+                              aria-label="Pesquisar categoria"
                               style="width: 180px"
                             />
                           </div>
@@ -63,15 +79,15 @@
                             aria-label="Filter by role"
                           >
                             <option value="all" selected>Todos</option>
-                            <option value="ativo">Ativos</option>
-                            <option value="inativo">Inativos</option>
+                            <option value="ATIVOS">Ativos</option>
+                            <option value="INATIVOS">Inativos</option>
                             
                           </select>
                           <button
                             type="button"
                             class="btn btn-sm btn-primary"
                             data-bs-toggle="modal"
-                            data-bs-target="#modal-add-user"
+                            data-bs-target="#modal-add-categoria"
                           >
                             <i class="bi bi-person-plus-fill me-1" aria-hidden="true"> </i>
                             Nova Categoria
@@ -94,6 +110,7 @@
                           </tr>
                         </thead>
                         <tbody>
+
                         @forelse($listaCategoria as $categoria) 
                           <tr>
                             {{-- ID --}}
@@ -122,13 +139,18 @@
                               @endif
                             </td>
                            
-                            {{-- AÇÕES  --}}
+                            {{-- BOTÕES DE AÇÕES  --}}
 
                             <td class="text-end">
                               <div class="btn-group btn-group-sm">
+                                
+                                
+                              {{-- EDITAR --}}
                                 <button
                                   type="button"
                                   class="btn btn-outline-secondary"
+                                  data-bs-toggle="modal" data-bs-target="#modal-edit-categoria"
+                                  data-id="""
                                   aria-label="Editar"
                                 >
                                   <i class="bi bi-pencil" aria-hidden="true"> </i>
@@ -163,7 +185,7 @@
                   <!--begin::Card Footer-->
                   <div class="card-footer clearfix">
                     <div class="float-start pt-1 fs-7 text-body-secondary">
-                     Total de Categorria:
+                     Número total de categorias:
                      <strong>
                         {{ $listaCategoria->count()}}
                      </strong>
@@ -200,80 +222,76 @@
             </div>
             <!--end::Row-->
 
-            <!--begin::Add User Modal-->
-            <div
-              class="modal fade"
-              id="modal-add-user"
-              tabindex="-1"
-              aria-labelledby="modal-add-user-label"
-              aria-hidden="true"
-            >
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <form>
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="modal-add-categoria-label">Add new categoria</h5>
-                      <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="mb-3">
-                        <label for="new-user-name" class="form-label"> Full name </label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="new-categoria-name"
-                          placeholder="e.g. Jane Doe"
-                          required
-                        />
-                      </div>
-                      <div class="mb-3">
-                        <label for="new-categoria-email" class="form-label"> Email address </label>
-                        <input
-                          type="email"
-                          class="form-control"
-                          id="new-categoria-email"
-                          placeholder="name@example.com"
-                          required
-                        />
-                        <div class="form-text">The invitation will be sent to this address.</div>
-                      </div>
-                      <div class="mb-3">
-                        <label for="new-user-role" class="form-label"> Role </label>
-                        <select id="new-user-role" class="form-select">
-                          <option selected>Subscriber</option>
-                          <option>Author</option>
-                          <option>Editor</option>
-                          <option>Administrator</option>
-                        </select>
-                      </div>
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          id="new-user-welcome"
-                          checked
-                        />
-                        <label class="form-check-label" for="new-user-welcome">
-                          Send a welcome email with login details
-                        </label>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Cancel
-                      </button>
-                      <button type="submit" class="btn btn-primary">Create user</button>
-                    </div>
-                  </form>
+            {{-- INÍCIO - FORMA DE CADASTRO --}}
+            
+              <!--begin::Add Categoria Modal-->
+              <div
+                class="modal fade"
+                id="modal-add-categoria"
+                tabindex="-1"
+                aria-labelledby="modal-add-categoria-label"
+                aria-hidden="true">
+        
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    
+                    {{-- COMEÇO - DEL FORM DE CADASTRO --}}
+                      <form
+                        action="{{route('admin.produtos.categoria.store')}}"
+                        method="POST"
+                        enctype="multipart/form-data">
+                        @csrf {{-- Gera token aleatório --}}
+
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modal-add-categoria-label">Adicionar nova categoria</h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+
+                        <div class="modal-body">
+                        
+                        
+                          <div class="mb-3">
+                            <label for="new-categoria-name" class="form-label"> Nome da Categoria </label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="new-categoria-name"
+                              placeholder="Coloque sua nova categoria aqui"
+                              required
+                              name="nome_categoria"
+                            />
+                          </div>
+                          
+                          <div class="mb-3">
+                            <label for="new-categoria-role" class="form-label"> Status </label>
+                            <select id="new-categoria-role" class="form-select" name="status_categoria">
+                              <option value="ATIVO">Ativo</option>
+                              <option value="INATIVO">Inativo</option>
+                            </select>
+                          </div>
+
+                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                          </button>
+                          <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                      </form>
+                    {{-- FINAL- FORMA DE CADASTRO --}}
+                  </div>
                 </div>
               </div>
-            </div>
-            <!--end::Add User Modal-->
+              <!--end::Add categoria Modal-->
+              
+            {{-- FIM - FORMA DE CADASTRO --}}
+
 
             <!--begin::Delete User Modal-->
             <div
