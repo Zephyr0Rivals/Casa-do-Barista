@@ -7,6 +7,7 @@ use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 // dashboard related |^
 class CategoriaController extends Controller{
@@ -23,54 +24,86 @@ class CategoriaController extends Controller{
     // CADASTRAR CADASTRO
 
     public function store(Request $request){
-        
-        
-        
-        // 1 - Validar os Dados
+
+
+        // 1- Validar os Dados
         $dados = $request->validate([
             'nome_categoria' => 'required|max:50',
             'status_categoria' => 'required|in:ATIVO,INATIVO'
-
         ]);
 
 
         try{
+
             DB::beginTransaction();
 
-            //2 - Cadastrar no Banco de Dados
-                $categoria = Categoria::created([
+            // 2 - Cadastrar no Banco de Dados
+                $categoria = Categoria::create([
                     'nome_categoria' => $dados['nome_categoria'],
-                    'status_categoria' => $dados['status_categoria'],
-                ]);
-            
-            
-            // 4 - Criar um nome para a imagem
-                // Café Mineiro mudar para: cafe_mineiro_7.png
-                $tituloImg = Str::slug($dados['titulo_banner']);
-               
-                
-            // 5 - Pegar e extensão do arquivo
-                $extensao = strtolower($imagem->getClientOriginalExtension());
-                 
-            // 6 -Criar nome Final
-                $nomeImg = $tituloImg . '_' . $banner->id_banner . '.' . $extensao; 
-            
+                    'status_categoria' => $dados['status_categoria']
 
-            //3 - Montar e enviar uma mensagem
+                ]); 
+
+
+             DB::commit();
+
+                // 3 - Montar e enviar uma mensagem
+                return redirect()
+                ->route('admin.produtos.categoria.index')
+                ->with('sucesso','Categoria: ' . $categoria->nome_categoria . ' foi cadastrada com sucesso!');
+
+        } catch (\Throwable $error) {
+
+             DB::rollback();
+
+            report($error);
+
             return redirect()
-            ->route('admin.produtos.categoria.index')
-            ->with('successo', 'Categoria: ' . $categoria->nome_categoria . ' foi cadastrada com sucesso!');
-
-
-        }catch (\Throwable $error) {
-
-
-
-
-
-        }
-
+                ->back()
+                ->withInput()
+                ->with('erro', 'Não foi possível cadastrar a categoria. Tente mais tarde!');
+            
+        }       
+   
     }
+
+     // ATUALIZAR BANNER: U
+    public function update(Request $request, int $id){
+        
+        $categoria = Categoria::findOrFail($id);
+
+        // 1- Validar os Dados
+        $dados = $request->validate([
+            'nome_categoria' => 'required|max:50',
+            'status_categoria' => 'required|in:ATIVO,INATIVO'
+        ]);
+
+         try{
+              
+            // 3 - ATUALIZA NO BANCO
+            $categoria->update([
+                'nome_categoria' => $dados['nome_categoria'],
+                'status_categoria' => $dados['status_categoria']
+
+            ]);
+
+              4  // Voltar para a Listagem
+                return redirect()
+                ->route('admin.produtos.categoria.index')
+                ->with('sucesso','Cateogoria: ' . $cateogoria->nome_cateogria . ' foi atualizado com sucesso!');
+
+        } catch (\Throwable $error) {
+         
+            report($error);
+
+            return redirect()
+                ->back()
+                ->with('erro', 'Não foi possível atualizar o banner. Tente mais tarde!');
+            
+        }  
+
+
+    } // FIM DO METODO UPDATE 
 
 
 

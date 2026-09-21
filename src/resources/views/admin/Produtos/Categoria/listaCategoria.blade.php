@@ -292,19 +292,89 @@
               
             {{-- FIM - FORMA DE CADASTRO --}}
 
+            {{-- INÍCIO -  FORMA EDITAR CATEGORIA --}}
+              <div
+              class="modal fade"
+              id="modal-edit-categoria"
+              tabindex="-1"
+              aria-labelledby="modal-add-categoria-label"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                
+                  <form
+                    id="form-categoria-banner"
+                    method="POST"
+                    enctype="multipart/form-data">
+                    @csrf {{-- gera token aleatório --}}
+                    @method('PUT')
 
-            <!--begin::Delete User Modal-->
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="modal-add-categoria-label">Editar nova categoria</h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                      <div class="mb-3">
+                        <label for="edit-banner-categoria" class="form-label"> Nome da categoria</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="edit-cateogria-titulo"
+                          required
+                          name="nome_categoriar"/>
+                      </div>
+
+                     <div class="mb-3">
+                        <label for="edit-categoria-nome" class="form-label"> Categoria nome</label>
+
+                        <input type="text" class="form-control" id="edit-categoria-nome" required name="nome_categoria" />
+                      
+                      </div> 
+                      
+                      <div class="mb-3">
+                        <label for="edit-categoria-status" class="form-label"> Status </label>
+                        <select id="edit-categoria-status" class="form-select" name="status_banner">
+                          <option value="ATIVO">Ativo</option>
+                          <option value="INATIVO">Inativo</option>
+                        </select>
+                      </div>
+                    </div>
+
+
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                      </button>
+                      <button type="submit" class="btn btn-primary">Atualizar categoria</button>
+                    </div>
+
+
+                  </form>
+
+                </div>
+              </div>
+            {{-- FIM - FORMA EDIT CATEGORIA --}}
+
+
+            <!--begin::Delete categoria Modal-->
             <div
               class="modal fade"
-              id="modal-delete-user"
+              id="modal-delete-categoria"
               tabindex="-1"
-              aria-labelledby="modal-delete-user-label"
+              aria-labelledby="modal-delete-categoria-label"
               aria-hidden="true"
             >
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="modal-delete-user-label">Delete user</h5>
+                    <h5 class="modal-title" id="modal-delete-categoria-label">Delete categoria</h5>
                     <button
                       type="button"
                       class="btn-close"
@@ -329,7 +399,7 @@
                 </div>
               </div>
             </div>
-            <!--end::Delete User Modal-->
+            <!--end::Delete categoria Modal-->
           </div>
           <!--end::Container-->
         </div>

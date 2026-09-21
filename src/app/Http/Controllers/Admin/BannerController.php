@@ -31,7 +31,7 @@ class BannerController extends Controller{
             'status_banner' => 'required|in:ATIVO,INATIVO'
         ]);
 
-
+        
         $caminhoArquivo = null;
 
         
@@ -60,7 +60,7 @@ class BannerController extends Controller{
                 // 5 - Pegar e extensão do arquivo
                 $extensao = strtolower($imagem->getClientOriginalExtension());
                  
-                // 6 -Criar nome Final
+                // 6 - Criar nome Final
                 $nomeImg = $tituloImg . '_' . $banner->id_banner . '.' . $extensao; 
 
                 // 7 - Salvar a imagem na pasta do projeto
