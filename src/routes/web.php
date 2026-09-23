@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\LinhaTempoController;
 use App\Http\Controllers\Admin\NewsletterController;
 // use App\Http\Controllers\Admin\VendaController;
 
+use App\Http\Controllers\Auth\LoginController;
+
 // ROTAS WEB
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/sobre', [SobreController::class, 'sobre'])->name('sobre');
@@ -29,36 +31,139 @@ Route::get('/cardapio/categoria/{idCategoria}', [CardapioController::class, 'car
 
 
 
-//ROTAS ADMINISTRATIVAS
-Route::prefix('admin')->group(function (){
 
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+/*
+|--------------------------------------------------------------------------
+| LOGIN
+|--------------------------------------------------------------------------
+|
+| O middleware guest permite acessar estas rotas somente quando o usuário NÃO está autenticado.
+|
+*/
 
-    // CRUD BANNER
-        Route::get('/banner', [BannerController::class, 'index'])->name('admin.banner.index'); //Lista Banner
+Route::middleware('guest')->group(function () {
+
+    // Exibir tela de login
+    Route::get('/login', [LoginController::class, 'index'])
+        ->name('login');
+
+    // Processar login
+    Route::post('/login', [LoginController::class, 'login'])
+        ->name('login.auth');
+
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| ÁREA RESTRITA
+|--------------------------------------------------------------------------
+|
+| Todas as rotas deste grupo exigem autenticação.
+|
+*/
+
+Route::middleware('auth')->group(function () {
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | DASHBOARD
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])
+        ->name('dashboard');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | LOGOUT
+    |--------------------------------------------------------------------------
+    */
+
+    Route::post('/logout', [LoginController::class, 'logout'])
+        ->name('logout');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | ROTAS ADMINISTRATIVAS
+    |--------------------------------------------------------------------------
+    */
+
+
+    //ROTAS ADMINISTRATIVAS
+    Route::prefix('admin')->group(function (){
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CRUD BANNER
+        |--------------------------------------------------------------------------
+        */  
+            //Lista Banner
+            Route::get('/banner', [BannerController::class, 'index'])->name('admin.banner.index'); 
+           
+            // Cadastrar Banner
+            Route::post('/banner', [BannerController::class, 'store'])->name('admin.banner.store');
+
+            //Abrir o form de Editar banner, só se abrisse em outra página
+            //Route::get('/banner/{id}/editar', [BannerController::class, 'edit'])->name('admin.banner.edit');
+
+            //Atualizar Banner
+            Route::put('/banner/{id}', [BannerController::class, 'update'])->name('admin.banner.update'); 
+            
+            // Ativar / desativar banner
+            Route::patch('/banner/{id}', [BannerController::class, 'status'])->name('admin.banner.status');
         
-        Route::post('/banner', [BannerController::class, 'store'])->name('admin.banner.store');// Cadastrar Banner
+            
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | CRUD GALERIA
+        |--------------------------------------------------------------------------
+        */
+            //Lista Galeria
+            Route::get('/galeria', [GaleriaController::class, 'index'])->name('admin.galeria.index');
+
+            // Cadastrar Galeria
+            Route::post('/galeria', [GaleriaController::class, 'store'])->name('admin.galeria.store'); 
+            
+            //Atualizar Banner 
+            Route::put('/galeria/{id}', [GaleriaController::class, 'update'])->name('admin.galeria.update'); 
+            
+            //Ativar o Desativar Banner
+            Route::patch('/galeria/{id}/status', [GaleriaController::class, 'status'])->name('admin.galeria.status');
+
+         /*
+        |--------------------------------------------------------------------------
+        | CRUD PRODUTO
+        |--------------------------------------------------------------------------
+        */
+
+
+         /*
+        |--------------------------------------------------------------------------
+        | CRUD CATEGORIA
+        |--------------------------------------------------------------------------
+        */
+            // Listar Categoria
+            Route::get('/produtos/categoria', [CategoriaController::class, 'index'])->name('admin.produtos.categoria.index'); 
+
+            //Cadastra o Banner
+            Route::post('/produtos/categoria', [CategoriaController::class, 'store'])->name('admin.produtos.categoria.store');
+            
+             //Atualiza o Banner
+            Route::put('/produtos/categoria/{id}', [CategoriaController::class, 'update'])->name('admin.produtos.categoria.update');
+
+            //Ativar e Desativar Banner
+            Route::patch('/produtos/categoria/{id}', [CategoriaController::class, 'status'])->name('admin.produtos.categoria.status'); 
     
-        //Route::get('/banner/{id}/editar', [BannerController::class, 'edit'])->name('admin.banner.edit');//Abrir o form de Editar banner, só se abrisse em outra página
-        
-        //Quer que você mude tudo, senão dará erro
-        Route::put('/banner/{id}', [BannerController::class, 'update'])->name('admin.banner.update');//Atualizar Banner 
-        
-        //Permite você mudar só um valor
-        Route::patch('/banner/{id}', [BannerController::class, 'status'])->name('admin.banner.status');
-    
-        // FINAL CRUD BANNER
 
 
-
-    // CRUD GALERIA
-    Route::get('/galeria', [GaleriaController::class, 'index'])->name('admin.galeria.index'); //Lista Galeria
-    Route::post('/galeria', [GaleriaController::class, 'store'])->name('admin.galeria.store'); // Cadastrar Galeria
-    Route::post('/galeria/{id}/editar', [GaleriaController::class, 'edit'])->name('admin.galeria.edit');
-     //Quer que você mude tudo, senão dará erro
-    Route::put('/banner/{id}', [BannerController::class, 'update'])->name('admin.banner.update');//Atualizar Banner 
-    //Permite você mudar só um valor
-    Route::patch('/banner/{id}/status', [BannerController::class, 'status'])->name('admin.banner.status');//Ativar o Desativar Banner
     
     // CRUD DEPOIMENTO
 
@@ -67,21 +172,14 @@ Route::prefix('admin')->group(function (){
     // CRUD NEWSLETTER
 
     // CRUD CLIENTE
-
-    // CRUD CATEGORIA
-        Route::get('/admin/produtos/categoria', [CategoriaController::class, 'index'])->name('admin.produtos.categoria.index'); // Listar Categoria
-        Route::post('/admin/produtos/categoria', [CategoriaController::class, 'store'])->name('admin.produtos.categoria.store'); //Cadastra o Banner
-        Route::put('/admin/produtos/categoria/{id}', [CategoriaController::class, 'update'])->name('admin.produtos.categoria.update'); //Atualiza o Banner
         
-        Route::patch('/admin/produtos/categoria/{îd}', [CategoriaController::class, 'status'])->name('admin.produtos.categoria.status'); //Ativar e Desativar Banner
-    
-    // FINAL CRUD CATEGORIA
+        Route::get('/depoimento', [DepoimentoController::class, 'index'])->name('admin.depoimento.index');
+        Route::get('/linhatempo', [LinhaTempoController::class, 'index'])->name('admin.linhadotempo.index');
+        Route::get('/newsletter', [NewsletterController::class, 'index'])->name('admin.newsletter.index');
+        Route::get('/vendas/cliente', [ClienteController::class, 'index'])->name('admin.vendas.cliente.index');
+
+
+   
+    });
+
 });
-
-
-
-Route::get('/admin/depoimento', [DepoimentoController::class, 'index'])->name('admin.depoimento.index');
-Route::get('/admin/linhatempo', [LinhaTempoController::class, 'index'])->name('admin.linhadotempo.index');
-Route::get('/admin/newsletter', [NewsletterController::class, 'index'])->name('admin.newsletter.index');
-Route::get('/admin/vendas/cliente', [ClienteController::class, 'index'])->name('admin.vendas.cliente.index');
-// Route::get('/admin/vendas/venda', [VendaController::class, 'index'])->name('admin.vendas.venda.index');
