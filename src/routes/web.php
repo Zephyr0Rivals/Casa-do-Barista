@@ -1,7 +1,5 @@
 <?php
 
-
-
 use App\Http\Controllers\Site\CardapioController;
 use App\Http\Controllers\Site\ContatoController;
 use App\Http\Controllers\Site\EventosController;
@@ -29,6 +27,14 @@ Route::get('/contato', [ContatoController::class, 'contato'])->name('contato');
 Route::get('/cardapio', [CardapioController::class, 'cardapio'])->name('cardapio');
 Route::get('/cardapio/categoria/{idCategoria}', [CardapioController::class, 'cardapio'])->name('cardapio.categoria');
 
+
+
+/*
+|--------------------------------------------------------------------------
+                        Documentação da API 
+|--------------------------------------------------------------------------
+*/
+Route::view('/documentacao', 'api.documentacao')->name('api.documentacao');
 
 
 
@@ -104,7 +110,7 @@ Route::middleware('auth')->group(function () {
         */  
             //Lista Banner
             Route::get('/banner', [BannerController::class, 'index'])->name('admin.banner.index'); 
-           
+
             // Cadastrar Banner
             Route::post('/banner', [BannerController::class, 'store'])->name('admin.banner.store');
 
@@ -138,14 +144,14 @@ Route::middleware('auth')->group(function () {
             //Ativar o Desativar Banner
             Route::patch('/galeria/{id}/status', [GaleriaController::class, 'status'])->name('admin.galeria.status');
 
-         /*
+        /*
         |--------------------------------------------------------------------------
         | CRUD PRODUTO
         |--------------------------------------------------------------------------
         */
 
 
-         /*
+        /*
         |--------------------------------------------------------------------------
         | CRUD CATEGORIA
         |--------------------------------------------------------------------------
@@ -179,7 +185,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/vendas/cliente', [ClienteController::class, 'index'])->name('admin.vendas.cliente.index');
 
 
-   
+
     });
 
 });

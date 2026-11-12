@@ -78,8 +78,7 @@ class CategoriaController extends Controller{
             'status_categoria' => 'required|in:ATIVO,INATIVO'
         ]);
 
-         try{
-              
+        try{   
             // 3 - ATUALIZA NO BANCO
             $categoria->update([
                 'nome_categoria' => $dados['nome_categoria'],
@@ -87,13 +86,12 @@ class CategoriaController extends Controller{
 
             ]);
 
-              4  // Voltar para a Listagem
+               // Voltar para a Listagem
                 return redirect()
                 ->route('admin.produtos.categoria.index')
                 ->with('sucesso','Cateogoria: ' . $cateogoria->nome_cateogria . ' foi atualizado com sucesso!');
 
-        } catch (\Throwable $error) {
-         
+        } catch (\Throwable $error) { 
             report($error);
 
             return redirect()
